@@ -5,3 +5,5 @@ data class Element(
 ) {
     fun render() = elementTemplate(name)
 }
+
+fun List<Element>.render() = joinToString(transform = Element::render, separator = "\n")
