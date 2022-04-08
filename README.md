@@ -1,38 +1,47 @@
-# xml-for-dummies
+# xmlao
 
-Library for JVM applications to serialize objects to XML
+Still using XML in 2022? No worries!
+
+With this simple library for the JVM you'll be serializing and operating XML in no time!
 
 ## How to use it
 
-Add the `xml-for-dummies` dependency
+Add the `xmlao` dependency
 
 ```
 # maven
 <dependency>
     <groupId>com.github.leomartins1999</groupId>
-    <artifactId>xml-for-dummies</artifactId>
+    <artifactId>xmlao</artifactId>
     <version>1.0.0</version>
 </dependency>
 
 # gradle
-implementation("com.github.leomartins1999:xml-for-dummies:1.0.0")
+implementation("com.github.leomartins1999:xmlao:1.0.0")
 ```
 
 And use our API to serialize objects to XML
 
 ```kotlin
-val obj = object {
-    val name = "John Doe"
-    val age = 23
-}
+val element = element("potatoes")
+println(element.render())
+/*
+    <potatoes>
+    </potatoes>
+ */
 
-val xml: XMLEntity = xml { obj }
+val valueElement = element("name", "Jane Doe")
+println(valueElement.render())
+/*
+    <name>Jane Doe</name>
+ */
 
-"""
-  <obj>
-    <name>John Doe</name>
-    <age>23</age>
-  </obj>
-"""
-println(xml.ser())
+val document = document(elements = listOf(element, valueElement))
+println(document.render())
+/*
+    <?xml version="1.0" encoding="UTF-8"?>
+    <potatoes>
+    </potatoes>
+    <name>Jane Doe</name>
+ */
 ```
