@@ -80,5 +80,4 @@ class DocumentTests {
 
         assertEquals(expected, document.render())
     }
-
 }

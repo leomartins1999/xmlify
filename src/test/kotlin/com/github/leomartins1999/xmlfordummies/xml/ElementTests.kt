@@ -27,5 +27,4 @@ class ElementTests {
 
         assertEquals(expected, element.render())
     }
-
 }
