@@ -18,10 +18,7 @@ class ElementTests {
     @Test
     fun `element is correctly rendered`() {
         val elementName = "myElement"
-        val expected = """
-            <$elementName>
-            </$elementName>
-        """.trimIndent()
+        val expected = "<$elementName/>"
 
         val element = element(elementName)
 
