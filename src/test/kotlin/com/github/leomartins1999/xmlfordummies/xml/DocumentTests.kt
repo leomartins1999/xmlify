@@ -49,8 +49,7 @@ class DocumentTests {
 
         val expected = """
             <?xml version="1.0" encoding="UTF-8"?>
-            <myElement>
-            </myElement>
+            <myElement/>
         """.trimIndent()
 
         val document = document(elements = elements)
@@ -68,12 +67,9 @@ class DocumentTests {
 
         val expected = """
             <?xml version="1.0" encoding="UTF-8"?>
-            <myElement1>
-            </myElement1>
-            <myElement2>
-            </myElement2>
-            <myElement3>
-            </myElement3>
+            <myElement1/>
+            <myElement2/>
+            <myElement3/>
         """.trimIndent()
 
         val document = document(elements = elements)
