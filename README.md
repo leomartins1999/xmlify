@@ -9,13 +9,13 @@ Add the `xml-for-dummies` dependency
 ```
 # maven
 <dependency>
-    <groupId>com.github.leomartins</groupId>
+    <groupId>com.github.leomartins1999</groupId>
     <artifactId>xml-for-dummies</artifactId>
     <version>1.0.0</version>
 </dependency>
 
 # gradle
-implementation("com.github.leomartins:xml-for-dummies:1.0.0")
+implementation("com.github.leomartins1999:xml-for-dummies:1.0.0")
 ```
 
 And use our API to serialize objects to XML
@@ -26,7 +26,7 @@ val obj = object {
     val age = 23
 }
 
-val xml: String = xml { obj }
+val xml: XMLEntity = xml { obj }
 
 """
   <obj>
@@ -34,5 +34,5 @@ val xml: String = xml { obj }
     <age>23</age>
   </obj>
 """
-println(xml)
+println(xml.ser())
 ```
