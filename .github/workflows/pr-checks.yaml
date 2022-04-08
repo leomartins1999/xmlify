@@ -7,11 +7,11 @@ jobs:
     name: PR Checks
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout branch
+      - name: Checkout Branch
         uses: actions/checkout@v2
       - name: Gradle Build
         run: ./gradlew build -x test
       - name: KTLint Check
         run: ./gradlew ktlintCheck
-      - name: Unit tests
+      - name: Unit Tests
         run: ./gradlew test
