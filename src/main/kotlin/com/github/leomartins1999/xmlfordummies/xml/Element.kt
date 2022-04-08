@@ -5,3 +5,7 @@ data class Element(
 ) {
     fun render() = elementTemplate(name)
 }
+
+fun List<Element>.render() =
+    if (isNotEmpty()) joinToString(transform = Element::render, separator = "\n")
+    else ""

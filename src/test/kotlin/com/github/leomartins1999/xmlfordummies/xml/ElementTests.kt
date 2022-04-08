@@ -23,8 +23,6 @@ class ElementTests {
             </$elementName>
         """.trimIndent()
 
-        println(expected)
-
         val element = element(elementName)
 
         assertEquals(expected, element.render())
