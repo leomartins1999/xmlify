@@ -1,9 +1,13 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 group = "com.github.leomartins1999"
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 plugins {
+    val testLoggerVersion = "3.2.0"
+    val ktlintVersion = "10.2.1"
     val kotlinVersion = "1.6.20"
+
+    id("com.adarshr.test-logger") version testLoggerVersion
+    id("org.jlleitschuh.gradle.ktlint") version ktlintVersion
 
     kotlin("jvm") version kotlinVersion
 }
@@ -20,8 +24,4 @@ repositories {
 
 tasks.test {
     useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
 }

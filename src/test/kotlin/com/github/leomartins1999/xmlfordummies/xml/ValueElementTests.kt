@@ -80,5 +80,4 @@ class ValueElementTests {
 
         assertEquals(expected, element.render())
     }
-
 }
