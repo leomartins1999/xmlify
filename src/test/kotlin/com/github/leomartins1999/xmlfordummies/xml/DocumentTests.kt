@@ -1,6 +1,5 @@
 package com.github.leomartins1999.xmlfordummies.xml
 
-import com.github.leomartins1999.xmlfordummies.XMLVersion
 import com.github.leomartins1999.xmlfordummies.document
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
