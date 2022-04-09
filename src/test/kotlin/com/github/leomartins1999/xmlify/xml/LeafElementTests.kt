@@ -29,6 +29,32 @@ class LeafElementTests {
     }
 
     @Test
+    fun `creates a leaf element with a single attribute`() {
+        val name = "myElement"
+        val value = true
+        val attributes = mapOf("language" to "PT")
+
+        val element = element(name, value, attributes)
+
+        assertEquals(name, element.name)
+        assertEquals(value, element.value)
+        assertEquals(attributes, element.attributes)
+    }
+
+    @Test
+    fun `creates a leaf element with multiple attributes`() {
+        val name = "myElement"
+        val value = true
+        val attributes = mapOf("language" to "PT", "location" to "Lisbon")
+
+        val element = element(name, value, attributes)
+
+        assertEquals(name, element.name)
+        assertEquals(value, element.value)
+        assertEquals(attributes, element.attributes)
+    }
+
+    @Test
     fun `renders a collapsed leaf element`() {
         val elementName = "myElement"
         val expected = "<$elementName/>"
@@ -87,6 +113,44 @@ class LeafElementTests {
         val expected = "<cost>49.99 €</cost>"
 
         val element = element(name, value)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `renders a collapsed leaf element with a single attribute`() {
+        val name = "myElement"
+        val attributes = mapOf("language" to "PT")
+
+        val expected = "<myElement language=\"PT\"/>"
+
+        val element = element(name, attributes = attributes)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `renders a leaf element with a single attribute`() {
+        val name = "myElement"
+        val value = true
+        val attributes = mapOf("language" to "PT")
+
+        val expected = "<myElement language=\"PT\">true</myElement>"
+
+        val element = element(name, value, attributes)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `renders a leaf element with multiple attributes`() {
+        val name = "myElement"
+        val value = true
+        val attributes = mapOf("language" to "PT", "cost" to "123")
+
+        val expected = "<myElement language=\"PT\" cost=\"123\">true</myElement>"
+
+        val element = element(name, value, attributes)
 
         assertEquals(expected, element.render())
     }

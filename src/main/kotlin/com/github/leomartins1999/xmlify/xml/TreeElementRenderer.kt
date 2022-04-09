@@ -25,17 +25,17 @@ class TreeElementRenderer : ElementVisitor {
 
     override fun visit(element: TreeElement) =
         if (element.hasChildren()) {
-            appendToOutput(treeElementStartTemplate(element.name))
+            appendToOutput(treeElementStartTemplate(element))
             depth++
             true
         } else {
-            appendToOutput(collapsedElementTemplate(element.name))
+            appendToOutput(collapsedElementTemplate(element))
             false
         }
 
     override fun endVisit(element: TreeElement) {
         depth--
-        appendToOutput(treeElementEndTemplate(element.name))
+        appendToOutput(treeElementEndTemplate(element))
     }
 
     private fun appendToOutput(text: String) = output.add(getIndentation() + text)
