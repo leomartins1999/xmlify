@@ -7,12 +7,12 @@ fun main() {
     println(element.render())
 
     // value element
-    val valueElement = element("name", "Jane Doe")
-    println("### Value element ###")
-    println(valueElement.render())
+    val leafElement = element("name", "Jane Doe")
+    println("### Leaf element ###")
+    println(leafElement.render())
 
     // xml document containing potatoes
-    val document = document(valueElement)
+    val document = document(leafElement)
     println("### Document ###")
     println(document)
     println(document.render())

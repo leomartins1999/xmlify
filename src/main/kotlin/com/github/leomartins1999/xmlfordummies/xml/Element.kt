@@ -1,12 +1,14 @@
 package com.github.leomartins1999.xmlfordummies.xml
 
-data class Element(
-    val name: String,
-    val value: Any? = null
-) {
-    fun render() = value
-        ?.let { valueElementTemplate(name, it.toString()) }
-        ?: elementTemplate(name)
+abstract class Element(val name: String) {
+    abstract fun render(): String
+    abstract fun accept(elementVisitor: ElementVisitor)
 }
 
-fun List<Element>.render() = joinToString(transform = Element::render, separator = "\n")
+class LeafElement(name: String, val value: Any? = null) : Element(name) {
+    override fun render() = value
+        ?.let { leafElementTemplate(name, it.toString()) }
+        ?: collapsedElementTemplate(name)
+
+    override fun accept(elementVisitor: ElementVisitor): Unit = elementVisitor.visit(this)
+}
