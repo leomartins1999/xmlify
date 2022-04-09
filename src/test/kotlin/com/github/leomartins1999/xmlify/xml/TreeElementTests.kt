@@ -40,6 +40,19 @@ class TreeElementTests {
     }
 
     @Test
+    fun `creates a tree element with attributes`() {
+        val name = "root"
+        val children = listOf<Element>()
+        val attributes = mapOf("language" to "PT")
+
+        val element = element(name, children, attributes)
+
+        assertEquals(name, element.name)
+        assertEquals(children, element.children)
+        assertEquals(attributes, element.attributes)
+    }
+
+    @Test
     fun `renders an empty tree element`() {
         val name = "root"
         val children = emptyList<Element>()
@@ -188,6 +201,53 @@ class TreeElementTests {
         """.trimIndent()
 
         val element = element(name, children)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `renders a collapsed tree element with one attribute`() {
+        val name = "root"
+        val children = listOf<Element>()
+        val attributes = mapOf("language" to "PT")
+
+        val expected = "<root language=\"PT\"/>"
+
+        val element = element(name, children, attributes)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `renders a tree element with one attribute`() {
+        val name = "root"
+        val children = listOf<Element>(LeafElement("leaf"))
+        val attributes = mapOf("language" to "PT")
+
+        val expected = """
+            <root language="PT">
+            ${"\t"}<leaf/>
+            </root>
+        """.trimIndent()
+
+        val element = element(name, children, attributes)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `renders a tree element with multiple attributes`() {
+        val name = "root"
+        val children = listOf<Element>(LeafElement("leaf"))
+        val attributes = mapOf("language" to "PT", "city" to "Lisbon")
+
+        val expected = """
+            <root language="PT" city="Lisbon">
+            ${"\t"}<leaf/>
+            </root>
+        """.trimIndent()
+
+        val element = element(name, children, attributes)
 
         assertEquals(expected, element.render())
     }

@@ -1,14 +1,27 @@
 package com.github.leomartins1999.xmlify.xml
 
-fun collapsedElementTemplate(name: String) = "<$name/>"
+const val space = " "
+const val emptyString = ""
 
-fun leafElementTemplate(name: String, value: String) = "<$name>$value</$name>"
+fun collapsedElementTemplate(element: Element) =
+    "<${element.name}${element.buildAttributesString()}/>"
 
-fun treeElementStartTemplate(name: String) = "<$name>"
+fun leafElementTemplate(element: LeafElement) =
+    "<${element.name}${element.buildAttributesString()}>${element.value}</${element.name}>"
 
-fun treeElementEndTemplate(name: String) = "</$name>"
+fun treeElementStartTemplate(element: TreeElement) = "<${element.name}${element.buildAttributesString()}>"
+
+fun treeElementEndTemplate(element: TreeElement) = "</${element.name}>"
 
 fun documentTemplate(version: String, encoding: String, elements: String) = """
 <?xml version="$version" encoding="$encoding"?>
 $elements
 """.trimIndent().trim()
+
+private fun Element.buildAttributesString() =
+    if (attributes.isEmpty()) emptyString
+    else attributes.toList().joinToString(
+        prefix = space,
+        separator = space,
+        transform = { "${it.first}=\"${it.second}\"" }
+    )

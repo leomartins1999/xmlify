@@ -9,13 +9,15 @@ import java.nio.charset.Charset
 
 fun element(
     name: String,
-    value: Any? = null
-) = LeafElement(name, value)
+    value: Any? = null,
+    attributes: Map<String, String> = mapOf()
+) = LeafElement(name, value, attributes)
 
 fun element(
     name: String,
-    children: List<Element>
-) = TreeElement(name, children)
+    children: List<Element>,
+    attributes: Map<String, String> = mapOf()
+) = TreeElement(name, children, attributes)
 
 fun document(
     element: LeafElement,
