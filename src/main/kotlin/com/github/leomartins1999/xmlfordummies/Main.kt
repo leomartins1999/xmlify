@@ -6,12 +6,22 @@ fun main() {
     println("### Simple element ###")
     println(element.render())
 
-    // value element
+    // leaf element
     val leafElement = element("name", "Jane Doe")
     println("### Leaf element ###")
     println(leafElement.render())
 
-    // xml document containing potatoes
+    // tree element
+    val treeElement = element(
+        "person", listOf(
+            leafElement,
+            element
+        )
+    )
+    println("### Tree element ###")
+    println(treeElement.render())
+
+    // xml document
     val document = document(leafElement)
     println("### Document ###")
     println(document)

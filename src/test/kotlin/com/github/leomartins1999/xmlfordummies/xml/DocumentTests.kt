@@ -1,7 +1,6 @@
 package com.github.leomartins1999.xmlfordummies.xml
 
 import com.github.leomartins1999.xmlfordummies.document
-import com.github.leomartins1999.xmlfordummies.element
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -9,7 +8,7 @@ class DocumentTests {
 
     @Test
     fun `creates document with default version and encoding`() {
-        val document = document(element("myElement"))
+        val document = document(LeafElement("myElement"))
 
         assertEquals(XMLVersion.V1_0, document.version)
         assertEquals(Charsets.UTF_8, document.encoding)
@@ -20,7 +19,7 @@ class DocumentTests {
         val version = XMLVersion.V2_0
         val encoding = Charsets.ISO_8859_1
 
-        val document = document(element("myElement"), version, encoding)
+        val document = document(LeafElement("myElement"), version, encoding)
 
         assertEquals(version, document.version)
         assertEquals(encoding, document.encoding)
@@ -28,7 +27,7 @@ class DocumentTests {
 
     @Test
     fun `renders a document with default version and encoding`() {
-        val element = element("myElement")
+        val element = LeafElement("myElement")
 
         val expected = """
             <?xml version="1.0" encoding="UTF-8"?>
@@ -42,7 +41,7 @@ class DocumentTests {
 
     @Test
     fun `renders a document with the specified version and encoding`() {
-        val element = element("myElement")
+        val element = LeafElement("myElement")
 
         val expected = """
             <?xml version="1.1" encoding="UTF-16"?>

@@ -4,6 +4,10 @@ fun collapsedElementTemplate(name: String) = "<$name/>"
 
 fun leafElementTemplate(name: String, value: String) = "<$name>$value</$name>"
 
+fun treeElementStartTemplate(name: String) = "<$name>"
+
+fun treeElementEndTemplate(name: String) = "</$name>"
+
 fun documentTemplate(version: String, encoding: String, elements: String) = """
 <?xml version="$version" encoding="$encoding"?>
 $elements

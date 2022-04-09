@@ -1,14 +1,17 @@
 package com.github.leomartins1999.xmlfordummies
 
-import com.github.leomartins1999.xmlfordummies.xml.Document
-import com.github.leomartins1999.xmlfordummies.xml.LeafElement
-import com.github.leomartins1999.xmlfordummies.xml.XMLVersion
+import com.github.leomartins1999.xmlfordummies.xml.*
 import java.nio.charset.Charset
 
 fun element(
     name: String,
     value: Any? = null
 ) = LeafElement(name, value)
+
+fun element(
+    name: String,
+    children: List<Element>
+) = TreeElement(name, children)
 
 fun document(
     element: LeafElement,
