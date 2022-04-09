@@ -9,7 +9,7 @@ enum class XMLVersion(val value: String) {
 data class Document(
     val version: XMLVersion,
     val encoding: Charset,
-    val elements: List<Element>
+    val element: Element
 ) {
-    fun render() = documentTemplate(version.value, encoding.name(), elements.render())
+    fun render() = documentTemplate(version.value, encoding.name(), element.render())
 }
