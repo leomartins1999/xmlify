@@ -30,13 +30,13 @@ println(element.render())
     </potatoes>
  */
 
-val valueElement = element("name", "Jane Doe")
-println(valueElement.render())
+val leafElement = element("name", "Jane Doe")
+println(leafElement.render())
 /*
     <name>Jane Doe</name>
  */
 
-val document = document(elements = listOf(element, valueElement))
+val document = document(elements = listOf(element, leafElement))
 println(document.render())
 /*
     <?xml version="1.0" encoding="UTF-8"?>

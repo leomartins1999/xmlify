@@ -4,10 +4,10 @@ import com.github.leomartins1999.xmlfordummies.element
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class ValueElementTests {
+class LeafElementTests {
 
     @Test
-    fun `creates a value element`() {
+    fun `creates a leaf element`() {
         val name = "myElement"
         val value = "potatoes"
 
@@ -18,7 +18,7 @@ class ValueElementTests {
     }
 
     @Test
-    fun `creates a value element with null value`() {
+    fun `creates a collapsed leaf element`() {
         val name = "myElement"
         val value = null
 
@@ -29,7 +29,17 @@ class ValueElementTests {
     }
 
     @Test
-    fun `renders a value element with integer value`() {
+    fun `renders a collapsed leaf element`() {
+        val elementName = "myElement"
+        val expected = "<$elementName/>"
+
+        val element = element(elementName)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `renders a leaf element with integer value`() {
         val name = "age"
         val value = 23
 
@@ -41,7 +51,7 @@ class ValueElementTests {
     }
 
     @Test
-    fun `renders a value element with float value`() {
+    fun `renders a leaf element with float value`() {
         val name = "temperature"
         val value = 18.5
 
@@ -53,7 +63,7 @@ class ValueElementTests {
     }
 
     @Test
-    fun `renders a value element with string value`() {
+    fun `renders a leaf element with string value`() {
         val name = "name"
         val value = "John Doe"
 
@@ -65,7 +75,7 @@ class ValueElementTests {
     }
 
     @Test
-    fun `renders a value element using the value's toString()`() {
+    fun `renders a leaf element using the value's toString()`() {
         val name = "cost"
         val value = object {
             val cost = 49.99
