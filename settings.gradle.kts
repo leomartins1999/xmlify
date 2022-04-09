@@ -1,1 +1,1 @@
-rootProject.name = "xmlao"
+rootProject.name = "xmlify"

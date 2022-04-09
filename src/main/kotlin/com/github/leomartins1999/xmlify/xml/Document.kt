@@ -1,4 +1,4 @@
-package com.github.leomartins1999.xmlfordummies.xml
+package com.github.leomartins1999.xmlify.xml
 
 import java.nio.charset.Charset
 
