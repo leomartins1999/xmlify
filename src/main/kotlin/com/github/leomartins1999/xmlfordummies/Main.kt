@@ -12,7 +12,7 @@ fun main() {
     println(valueElement.render())
 
     // xml document containing potatoes
-    val document = document(elements = listOf(element, valueElement))
+    val document = document(valueElement)
     println("### Document ###")
     println(document)
     println(document.render())

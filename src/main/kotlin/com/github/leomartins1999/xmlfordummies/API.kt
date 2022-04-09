@@ -11,7 +11,7 @@ fun element(
 ) = Element(name, value)
 
 fun document(
+    element: Element,
     version: XMLVersion = XMLVersion.V1_0,
     encoding: Charset = Charsets.UTF_8,
-    elements: List<Element> = emptyList()
-) = Document(version, encoding, elements)
+) = Document(version, encoding, element)
