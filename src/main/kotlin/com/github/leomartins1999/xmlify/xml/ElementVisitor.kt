@@ -1,4 +1,4 @@
-package com.github.leomartins1999.xmlfordummies.xml
+package com.github.leomartins1999.xmlify.xml
 
 interface ElementVisitor {
     fun visit(element: LeafElement)

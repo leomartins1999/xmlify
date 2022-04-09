@@ -1,4 +1,4 @@
-package com.github.leomartins1999.xmlfordummies.xml
+package com.github.leomartins1999.xmlify.xml
 
 const val newline = "\n"
 const val tab = "\t"
@@ -41,5 +41,4 @@ class TreeElementRenderer : ElementVisitor {
     private fun appendToOutput(text: String) = output.add(generateIndentation() + text)
 
     private fun generateIndentation() = tab.repeat(depth)
-
 }

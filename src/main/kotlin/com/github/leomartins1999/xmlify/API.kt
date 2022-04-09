@@ -1,6 +1,10 @@
-package com.github.leomartins1999.xmlfordummies
+package com.github.leomartins1999.xmlify
 
-import com.github.leomartins1999.xmlfordummies.xml.*
+import com.github.leomartins1999.xmlify.xml.Document
+import com.github.leomartins1999.xmlify.xml.Element
+import com.github.leomartins1999.xmlify.xml.LeafElement
+import com.github.leomartins1999.xmlify.xml.TreeElement
+import com.github.leomartins1999.xmlify.xml.XMLVersion
 import java.nio.charset.Charset
 
 fun element(

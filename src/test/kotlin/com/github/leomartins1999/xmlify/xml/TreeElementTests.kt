@@ -1,6 +1,6 @@
-package com.github.leomartins1999.xmlfordummies.xml
+package com.github.leomartins1999.xmlify.xml
 
-import com.github.leomartins1999.xmlfordummies.element
+import com.github.leomartins1999.xmlify.element
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -126,7 +126,8 @@ class TreeElementTests {
         val name = "root"
         val children = listOf(
             TreeElement(
-                "tree", listOf(
+                "tree",
+                listOf(
                     LeafElement("collapsed"),
                     LeafElement("leaf", true)
                 )
@@ -155,11 +156,13 @@ class TreeElementTests {
             LeafElement("age", 23),
             LeafElement("female"),
             TreeElement(
-                "address", listOf(
+                "address",
+                listOf(
                     LeafElement("street", "Saint James' Street"),
                     LeafElement("apartment"),
                     TreeElement(
-                        "postalCode", listOf(
+                        "postalCode",
+                        listOf(
                             LeafElement("code", "2000-125"),
                             LeafElement("city", "London")
                         )

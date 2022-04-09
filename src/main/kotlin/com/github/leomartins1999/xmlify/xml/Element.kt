@@ -1,4 +1,4 @@
-package com.github.leomartins1999.xmlfordummies.xml
+package com.github.leomartins1999.xmlify.xml
 
 abstract class Element(val name: String) {
     abstract fun render(): String

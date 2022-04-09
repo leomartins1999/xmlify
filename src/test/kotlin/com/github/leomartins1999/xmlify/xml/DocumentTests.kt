@@ -1,6 +1,6 @@
-package com.github.leomartins1999.xmlfordummies.xml
+package com.github.leomartins1999.xmlify.xml
 
-import com.github.leomartins1999.xmlfordummies.document
+import com.github.leomartins1999.xmlify.document
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

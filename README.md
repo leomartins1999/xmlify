@@ -1,4 +1,4 @@
-# xmlao
+# xmlify
 
 Still using XML in 2022? No worries!
 
@@ -6,18 +6,18 @@ With this simple library for the JVM you'll be serializing and operating XML in 
 
 ## How to use it
 
-Add the `xmlao` dependency
+Add the `xmlify` dependency
 
 ```
 # maven
 <dependency>
     <groupId>com.github.leomartins1999</groupId>
-    <artifactId>xmlao</artifactId>
+    <artifactId>xmlify</artifactId>
     <version>1.0.0</version>
 </dependency>
 
 # gradle
-implementation("com.github.leomartins1999:xmlao:1.0.0")
+implementation("com.github.leomartins1999:xmlify:1.0.0")
 ```
 
 And use our API to serialize objects to XML

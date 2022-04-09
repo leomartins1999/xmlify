@@ -1,4 +1,4 @@
-package com.github.leomartins1999.xmlfordummies
+package com.github.leomartins1999.xmlify
 
 fun main() {
     // simple element
@@ -13,7 +13,8 @@ fun main() {
 
     // tree element
     val treeElement = element(
-        "person", listOf(
+        "person",
+        listOf(
             leafElement,
             element
         )
