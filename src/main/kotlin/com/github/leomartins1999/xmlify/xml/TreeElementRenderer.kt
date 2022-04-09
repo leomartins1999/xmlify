@@ -26,7 +26,7 @@ class TreeElementRenderer : ElementVisitor {
     override fun visit(element: TreeElement) =
         if (element.hasChildren()) {
             appendToOutput(treeElementStartTemplate(element.name))
-            depth += 1
+            depth++
             true
         } else {
             appendToOutput(collapsedElementTemplate(element.name))
@@ -34,11 +34,11 @@ class TreeElementRenderer : ElementVisitor {
         }
 
     override fun endVisit(element: TreeElement) {
-        depth -= 1
+        depth--
         appendToOutput(treeElementEndTemplate(element.name))
     }
 
-    private fun appendToOutput(text: String) = output.add(generateIndentation() + text)
+    private fun appendToOutput(text: String) = output.add(getIndentation() + text)
 
-    private fun generateIndentation() = tab.repeat(depth)
+    private fun getIndentation() = tab.repeat(depth)
 }
