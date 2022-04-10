@@ -154,4 +154,28 @@ class LeafElementTests {
 
         assertEquals(expected, element.render())
     }
+
+    @Test
+    fun `escapes the attributes of a leaf element`() {
+        val name = "myElement"
+        val attributes = mapOf("chars" to "\" ' < > &")
+
+        val expected = "<myElement chars=\"&quot; &apos; &lt; &gt; &amp;\"/>"
+
+        val element = element(name, attributes = attributes)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `escapes the value of a leaf element`() {
+        val name = "myElement"
+        val value = "\" ' < > &"
+
+        val expected = "<myElement>&quot; &apos; &lt; &gt; &amp;</myElement>"
+
+        val element = element(name, value)
+
+        assertEquals(expected, element.render())
+    }
 }

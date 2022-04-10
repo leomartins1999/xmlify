@@ -3,11 +3,23 @@ package com.github.leomartins1999.xmlify.xml
 const val space = " "
 const val emptyString = ""
 
-fun collapsedElementTemplate(element: Element) =
-    "<${element.name}${element.buildAttributesString()}/>"
+val charactersToEscapedValues = mapOf(
+    "&" to "&amp;",
+    "\"" to "&quot;",
+    "\'" to "&apos;",
+    "<" to "&lt;",
+    ">" to "&gt;",
+)
 
-fun leafElementTemplate(element: LeafElement) =
-    "<${element.name}${element.buildAttributesString()}>${element.value}</${element.name}>"
+fun collapsedElementTemplate(element: Element) = "<${element.name}${element.buildAttributesString()}/>"
+
+fun leafElementTemplate(element: LeafElement): String {
+    val name = element.name
+    val attributes = element.buildAttributesString()
+    val value = element.value.toString().escapeCharacters()
+
+    return "<$name$attributes>$value</$name>"
+}
 
 fun treeElementStartTemplate(element: TreeElement) = "<${element.name}${element.buildAttributesString()}>"
 
@@ -23,5 +35,12 @@ private fun Element.buildAttributesString() =
     else attributes.toList().joinToString(
         prefix = space,
         separator = space,
-        transform = { "${it.first}=\"${it.second}\"" }
+        transform = { "${it.first}=\"${it.second.escapeCharacters()}\"" }
     )
+
+private fun String.escapeCharacters() =
+    charactersToEscapedValues
+        .toList()
+        .fold(this) { str, char ->
+            str.replace(char.first, char.second)
+        }

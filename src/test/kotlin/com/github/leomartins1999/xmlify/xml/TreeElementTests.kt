@@ -190,7 +190,7 @@ class TreeElementTests {
             ${"\t"}<age>23</age>
             ${"\t"}<female/>
             ${"\t"}<address>
-            ${"\t\t"}<street>Saint James' Street</street>
+            ${"\t\t"}<street>Saint James&apos; Street</street>
             ${"\t\t"}<apartment/>
             ${"\t\t"}<postalCode>
             ${"\t\t\t"}<code>2000-125</code>
@@ -248,6 +248,19 @@ class TreeElementTests {
         """.trimIndent()
 
         val element = element(name, children, attributes)
+
+        assertEquals(expected, element.render())
+    }
+
+    @Test
+    fun `escapes the attributes of a tree element`() {
+        val name = "myElement"
+        val attributes = mapOf("chars" to "\" ' < > &")
+        val children = listOf<Element>()
+
+        val expected = "<myElement chars=\"&quot; &apos; &lt; &gt; &amp;\"/>"
+
+        val element = element(name, children, attributes = attributes)
 
         assertEquals(expected, element.render())
     }
