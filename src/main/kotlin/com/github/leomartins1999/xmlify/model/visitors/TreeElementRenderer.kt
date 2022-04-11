@@ -9,11 +9,6 @@ import com.github.leomartins1999.xmlify.model.treeElementStartTemplate
 const val newline = "\n"
 const val tab = "\t"
 
-/**
- * This object is stateful!
- * Make you sure you use this only once
- * per TreeElement
- */
 class TreeElementRenderer(
     private val treeElement: TreeElement
 ) : ElementVisitor {
