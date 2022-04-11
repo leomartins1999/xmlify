@@ -1,73 +1,31 @@
-package com.github.leomartins1999.xmlify.xml
+package com.github.leomartins1999.xmlify.model.visitors
 
-import com.github.leomartins1999.xmlify.element
+import com.github.leomartins1999.xmlify.model.Element
+import com.github.leomartins1999.xmlify.model.LeafElement
+import com.github.leomartins1999.xmlify.model.TreeElement
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class TreeElementTests {
-
-    @Test
-    fun `creates a tree element without elements`() {
-        val name = "root"
-        val children = emptyList<Element>()
-
-        val element = element(name, children)
-
-        assertEquals(name, element.name)
-        assertEquals(children, element.children)
-    }
-
-    @Test
-    fun `creates a tree element with a single element`() {
-        val name = "root"
-        val children = listOf<Element>(LeafElement("leaf"))
-
-        val element = element(name, children)
-
-        assertEquals(name, element.name)
-        assertEquals(children, element.children)
-    }
-
-    @Test
-    fun `creates a tree element with multiple elements`() {
-        val name = "root"
-        val children = listOf(LeafElement("leaf"), TreeElement("tree"))
-
-        val element = element(name, children)
-
-        assertEquals(name, element.name)
-        assertEquals(children, element.children)
-    }
-
-    @Test
-    fun `creates a tree element with attributes`() {
-        val name = "root"
-        val children = listOf<Element>()
-        val attributes = mapOf("language" to "PT")
-
-        val element = element(name, children, attributes)
-
-        assertEquals(name, element.name)
-        assertEquals(children, element.children)
-        assertEquals(attributes, element.attributes)
-    }
+class TreeElementRendererTests {
 
     @Test
     fun `renders an empty tree element`() {
         val name = "root"
         val children = emptyList<Element>()
+        val element = TreeElement(name, children)
 
         val expected = "<root/>"
 
-        val element = element(name, children)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
     fun `renders a tree element with a collapsed leaf element`() {
         val name = "root"
         val children = listOf(LeafElement("leaf"))
+        val element = TreeElement(name, children)
 
         val expected = """
             <root>
@@ -75,15 +33,16 @@ class TreeElementTests {
             </root>
         """.trimIndent()
 
-        val element = element(name, children)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
     fun `renders a tree element with a leaf element`() {
         val name = "root"
         val children = listOf(LeafElement("leaf", true))
+        val element = TreeElement(name, children)
 
         val expected = """
             <root>
@@ -91,9 +50,9 @@ class TreeElementTests {
             </root>
         """.trimIndent()
 
-        val element = element(name, children)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -104,6 +63,7 @@ class TreeElementTests {
             LeafElement("collapsed"),
             LeafElement("anotherLeaf", 10)
         )
+        val element = TreeElement(name, children)
 
         val expected = """
             <root>
@@ -113,15 +73,16 @@ class TreeElementTests {
             </root>
         """.trimIndent()
 
-        val element = element(name, children)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
     fun `renders a tree element with a collapsed tree element`() {
         val name = "root"
         val children = listOf(TreeElement("tree"))
+        val element = TreeElement(name, children)
 
         val expected = """
             <root>
@@ -129,9 +90,9 @@ class TreeElementTests {
             </root>
         """.trimIndent()
 
-        val element = element(name, children)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -146,6 +107,7 @@ class TreeElementTests {
                 )
             )
         )
+        val element = TreeElement(name, children)
 
         val expected = """
             <root>
@@ -156,9 +118,9 @@ class TreeElementTests {
             </root>
         """.trimIndent()
 
-        val element = element(name, children)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -183,6 +145,7 @@ class TreeElementTests {
                 )
             )
         )
+        val element = TreeElement(name, children)
 
         val expected = """
             <person>
@@ -200,9 +163,9 @@ class TreeElementTests {
             </person>
         """.trimIndent()
 
-        val element = element(name, children)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -210,12 +173,13 @@ class TreeElementTests {
         val name = "root"
         val children = listOf<Element>()
         val attributes = mapOf("language" to "PT")
+        val element = TreeElement(name, children, attributes)
 
         val expected = "<root language=\"PT\"/>"
 
-        val element = element(name, children, attributes)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -223,6 +187,7 @@ class TreeElementTests {
         val name = "root"
         val children = listOf<Element>(LeafElement("leaf"))
         val attributes = mapOf("language" to "PT")
+        val element = TreeElement(name, children, attributes)
 
         val expected = """
             <root language="PT">
@@ -230,9 +195,9 @@ class TreeElementTests {
             </root>
         """.trimIndent()
 
-        val element = element(name, children, attributes)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -240,6 +205,7 @@ class TreeElementTests {
         val name = "root"
         val children = listOf<Element>(LeafElement("leaf"))
         val attributes = mapOf("language" to "PT", "city" to "Lisbon")
+        val element = TreeElement(name, children, attributes)
 
         val expected = """
             <root language="PT" city="Lisbon">
@@ -247,9 +213,9 @@ class TreeElementTests {
             </root>
         """.trimIndent()
 
-        val element = element(name, children, attributes)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -257,11 +223,12 @@ class TreeElementTests {
         val name = "myElement"
         val attributes = mapOf("chars" to "\" ' < > &")
         val children = listOf<Element>()
+        val element = TreeElement(name, children, attributes)
 
         val expected = "<myElement chars=\"&quot; &apos; &lt; &gt; &amp;\"/>"
 
-        val element = element(name, children, attributes = attributes)
+        val result = TreeElementRenderer(element).render()
 
-        assertEquals(expected, element.render())
+        assertEquals(expected, result)
     }
 }

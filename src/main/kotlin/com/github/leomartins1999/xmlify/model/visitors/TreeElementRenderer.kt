@@ -1,19 +1,22 @@
-package com.github.leomartins1999.xmlify.xml
+package com.github.leomartins1999.xmlify.model.visitors
+
+import com.github.leomartins1999.xmlify.model.LeafElement
+import com.github.leomartins1999.xmlify.model.TreeElement
+import com.github.leomartins1999.xmlify.model.collapsedElementTemplate
+import com.github.leomartins1999.xmlify.model.treeElementEndTemplate
+import com.github.leomartins1999.xmlify.model.treeElementStartTemplate
 
 const val newline = "\n"
 const val tab = "\t"
 
-/**
- * This object is stateful!
- * Make you sure you use this only once
- * per TreeElement
- */
-class TreeElementRenderer : ElementVisitor {
+class TreeElementRenderer(
+    private val treeElement: TreeElement
+) : ElementVisitor {
 
     private val output = mutableListOf<String>()
     private var depth = 0
 
-    fun render(treeElement: TreeElement): String {
+    fun render(): String {
         treeElement.accept(this)
 
         return output.joinToString(separator = newline)

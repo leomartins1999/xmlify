@@ -1,4 +1,4 @@
-package com.github.leomartins1999.xmlify.xml
+package com.github.leomartins1999.xmlify.model
 
 import com.github.leomartins1999.xmlify.document
 import org.junit.jupiter.api.Assertions.assertEquals
