@@ -1,10 +1,10 @@
 package com.github.leomartins1999.xmlify
 
-import com.github.leomartins1999.xmlify.xml.Document
-import com.github.leomartins1999.xmlify.xml.Element
-import com.github.leomartins1999.xmlify.xml.LeafElement
-import com.github.leomartins1999.xmlify.xml.TreeElement
-import com.github.leomartins1999.xmlify.xml.XMLVersion
+import com.github.leomartins1999.xmlify.model.Document
+import com.github.leomartins1999.xmlify.model.Element
+import com.github.leomartins1999.xmlify.model.LeafElement
+import com.github.leomartins1999.xmlify.model.TreeElement
+import com.github.leomartins1999.xmlify.model.XMLVersion
 import java.nio.charset.Charset
 
 fun element(

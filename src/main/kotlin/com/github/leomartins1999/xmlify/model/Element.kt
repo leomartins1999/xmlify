@@ -1,4 +1,8 @@
-package com.github.leomartins1999.xmlify.xml
+package com.github.leomartins1999.xmlify.model
+
+import com.github.leomartins1999.xmlify.model.visitors.ElementFinder
+import com.github.leomartins1999.xmlify.model.visitors.ElementVisitor
+import com.github.leomartins1999.xmlify.model.visitors.TreeElementRenderer
 
 abstract class Element(val name: String, val attributes: Map<String, String>) {
     abstract fun render(): String
@@ -24,7 +28,9 @@ class TreeElement(
 ) : Element(name, attributes) {
     fun hasChildren() = children.isNotEmpty()
 
-    override fun render() = TreeElementRenderer().render(this)
+    fun find(filter: (Element) -> Boolean) = ElementFinder(this, filter).find()
+
+    override fun render() = TreeElementRenderer(this).render()
 
     override fun accept(visitor: ElementVisitor) {
         if (!visitor.visit(this)) return

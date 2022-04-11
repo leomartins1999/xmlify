@@ -26,6 +26,7 @@ fun main() {
     )
     println("### Tree element ###")
     println(treeElement.render())
+    println(treeElement.find { it == leafElement })
 
     // xml document
     val document = document(leafElement)
