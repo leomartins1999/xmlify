@@ -14,11 +14,9 @@ class ElementFilter(
 
     private val elements = mutableListOf<Element>()
 
-    fun filter(): TreeElement {
-        root.children.forEach { it.accept(this) }
-
-        return TreeElement(root.name, elements, root.attributes)
-    }
+    fun filter() =
+        root.also { it.children.forEach { children -> children.accept(this) } }
+            .copy(children = elements)
 
     override fun visit(element: LeafElement) {
         if (leafPredicate(element)) elements.add(element)
@@ -33,5 +31,4 @@ class ElementFilter(
 
         return false
     }
-
 }

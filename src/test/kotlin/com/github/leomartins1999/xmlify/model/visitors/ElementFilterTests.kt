@@ -92,7 +92,8 @@ class ElementFilterTests {
             listOf(
                 TreeElement("tree1"),
                 TreeElement(
-                    "tree2", listOf(
+                    "tree2",
+                    listOf(
                         LeafElement("leaf2True", true),
                         LeafElement("leaf2False", false)
                     )
@@ -117,7 +118,8 @@ class ElementFilterTests {
                     "tree2",
                     listOf(
                         TreeElement(
-                            "nestedTree2", listOf(
+                            "nestedTree2",
+                            listOf(
                                 TreeElement("leaf2")
                             )
                         )
@@ -153,7 +155,8 @@ class ElementFilterTests {
                 LeafElement("stringLeaf"),
                 TreeElement("collapsedTree"),
                 TreeElement(
-                    "tree", listOf(
+                    "tree",
+                    listOf(
                         LeafElement("booleanLeaf", false)
                     )
                 )
