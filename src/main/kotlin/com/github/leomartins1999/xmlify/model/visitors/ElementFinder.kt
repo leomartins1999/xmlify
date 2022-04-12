@@ -1,12 +1,13 @@
 package com.github.leomartins1999.xmlify.model.visitors
 
 import com.github.leomartins1999.xmlify.model.Element
+import com.github.leomartins1999.xmlify.model.ElementPredicate
 import com.github.leomartins1999.xmlify.model.LeafElement
 import com.github.leomartins1999.xmlify.model.TreeElement
 
 class ElementFinder(
     val element: Element,
-    val filter: (Element) -> Boolean
+    val predicate: ElementPredicate
 ) : ElementVisitor {
 
     private val results = mutableListOf<Element>()
@@ -18,6 +19,6 @@ class ElementFinder(
     override fun visit(element: TreeElement) = checkAndAdd(element).let { true }
 
     private fun checkAndAdd(element: Element) {
-        if (filter(element)) results.add(element)
+        if (predicate(element)) results.add(element)
     }
 }
