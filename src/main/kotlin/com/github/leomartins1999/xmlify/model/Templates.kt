@@ -1,9 +1,9 @@
 package com.github.leomartins1999.xmlify.model
 
-const val space = " "
-const val emptyString = ""
+private const val space = " "
+private const val emptyString = ""
 
-val charactersToEscapedValues = mapOf(
+private val charactersToEscapedValues = mapOf(
     "&" to "&amp;",
     "\"" to "&quot;",
     "\'" to "&apos;",
@@ -11,9 +11,9 @@ val charactersToEscapedValues = mapOf(
     ">" to "&gt;",
 )
 
-fun collapsedElementTemplate(element: Element) = "<${element.name}${element.buildAttributesString()}/>"
+internal fun collapsedElementTemplate(element: Element) = "<${element.name}${element.buildAttributesString()}/>"
 
-fun leafElementTemplate(element: LeafElement): String {
+internal fun leafElementTemplate(element: LeafElement): String {
     val name = element.name
     val attributes = element.buildAttributesString()
     val value = element.value.toString().escapeCharacters()
@@ -21,11 +21,11 @@ fun leafElementTemplate(element: LeafElement): String {
     return "<$name$attributes>$value</$name>"
 }
 
-fun treeElementStartTemplate(element: TreeElement) = "<${element.name}${element.buildAttributesString()}>"
+internal fun treeElementStartTemplate(element: TreeElement) = "<${element.name}${element.buildAttributesString()}>"
 
-fun treeElementEndTemplate(element: TreeElement) = "</${element.name}>"
+internal fun treeElementEndTemplate(element: TreeElement) = "</${element.name}>"
 
-fun documentTemplate(version: String, encoding: String, elements: String) = """
+internal fun documentTemplate(version: String, encoding: String, elements: String) = """
 <?xml version="$version" encoding="$encoding"?>
 $elements
 """.trimIndent().trim()
