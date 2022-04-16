@@ -1,0 +1,21 @@
+name: Generate Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Build:
+    name: PR Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v3
+      - name: Generate Docs
+        run: ./gradlew dokkaHtml
+      - name: Deploy Docs
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: docs
+          folder: build/dokka/html
