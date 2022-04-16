@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 group = "com.github.leomartins1999"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
@@ -8,6 +10,7 @@ plugins {
 
     id("com.adarshr.test-logger") version testLoggerVersion
     id("org.jlleitschuh.gradle.ktlint") version ktlintVersion
+    id("org.jetbrains.dokka") version kotlinVersion
 
     kotlin("jvm") version kotlinVersion
 }
@@ -24,4 +27,14 @@ repositories {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets {
+        named("main") {
+            moduleName.set("XMLify")
+
+            documentedVisibilities.set(setOf(org.jetbrains.dokka.DokkaConfiguration.Visibility.PUBLIC))
+        }
+    }
 }
