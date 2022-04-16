@@ -1,0 +1,40 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.github.leomartins1999.xmlify.model.visitors////PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model.visitors/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model.visitors/ElementVisitor///PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model.visitors/-element-visitor/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model.visitors/ElementVisitor/endVisit/#com.github.leomartins1999.xmlify.model.TreeElement/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model.visitors/-element-visitor/end-visit.html
+$dokka.location:com.github.leomartins1999.xmlify.model.visitors/ElementVisitor/visit/#com.github.leomartins1999.xmlify.model.LeafElement/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model.visitors/-element-visitor/visit.html
+$dokka.location:com.github.leomartins1999.xmlify.model.visitors/ElementVisitor/visit/#com.github.leomartins1999.xmlify.model.TreeElement/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model.visitors/-element-visitor/visit.html
+$dokka.location:com.github.leomartins1999.xmlify.model////PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model//document/#com.github.leomartins1999.xmlify.model.LeafElement#com.github.leomartins1999.xmlify.model.XMLVersion#java.nio.charset.Charset/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/document.html
+$dokka.location:com.github.leomartins1999.xmlify.model//element/#kotlin.String#kotlin.Any?#kotlin.collections.Map[kotlin.String,kotlin.String]/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/element.html
+$dokka.location:com.github.leomartins1999.xmlify.model//element/#kotlin.String#kotlin.collections.List[com.github.leomartins1999.xmlify.model.Element]#kotlin.collections.Map[kotlin.String,kotlin.String]/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/element.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Document///PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-document/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Document/element/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-document/element.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Document/encoding/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-document/encoding.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Document/render/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-document/render.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Document/version/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-document/version.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Element///PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-element/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Element/Element/#kotlin.String#kotlin.collections.Map[kotlin.String,kotlin.String]/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-element/-element.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Element/accept/#com.github.leomartins1999.xmlify.model.visitors.ElementVisitor/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-element/accept.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Element/attributes/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-element/attributes.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Element/name/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-element/name.html
+$dokka.location:com.github.leomartins1999.xmlify.model/Element/render/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-element/render.html
+$dokka.location:com.github.leomartins1999.xmlify.model/LeafElement///PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-leaf-element/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model/LeafElement/accept/#com.github.leomartins1999.xmlify.model.visitors.ElementVisitor/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-leaf-element/accept.html
+$dokka.location:com.github.leomartins1999.xmlify.model/LeafElement/render/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-leaf-element/render.html
+$dokka.location:com.github.leomartins1999.xmlify.model/LeafElement/value/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-leaf-element/value.html
+$dokka.location:com.github.leomartins1999.xmlify.model/TreeElement///PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-tree-element/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model/TreeElement/accept/#com.github.leomartins1999.xmlify.model.visitors.ElementVisitor/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-tree-element/accept.html
+$dokka.location:com.github.leomartins1999.xmlify.model/TreeElement/children/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-tree-element/children.html
+$dokka.location:com.github.leomartins1999.xmlify.model/TreeElement/filter/#kotlin.Function1[com.github.leomartins1999.xmlify.model.LeafElement,kotlin.Boolean]#kotlin.Function1[com.github.leomartins1999.xmlify.model.TreeElement,kotlin.Boolean]/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-tree-element/filter.html
+$dokka.location:com.github.leomartins1999.xmlify.model/TreeElement/find/#kotlin.Function1[com.github.leomartins1999.xmlify.model.Element,kotlin.Boolean]/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-tree-element/find.html
+$dokka.location:com.github.leomartins1999.xmlify.model/TreeElement/hasChildren/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-tree-element/has-children.html
+$dokka.location:com.github.leomartins1999.xmlify.model/TreeElement/render/#/PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-tree-element/render.html
+$dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion.V1_0///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-x-m-lify/com.github.leomartins1999.xmlify.model/-x-m-l-version/-v1_0/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion.V1_1///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-x-m-lify/com.github.leomartins1999.xmlify.model/-x-m-l-version/-v1_1/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion.V2_0///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-x-m-lify/com.github.leomartins1999.xmlify.model/-x-m-l-version/-v2_0/index.html
+$dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion///PointingToDeclaration/-x-m-lify/com.github.leomartins1999.xmlify.model/-x-m-l-version/index.html
+com.github.leomartins1999.xmlify.model
+com.github.leomartins1999.xmlify.model.visitors
+
