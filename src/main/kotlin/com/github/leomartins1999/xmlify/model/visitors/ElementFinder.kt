@@ -5,7 +5,7 @@ import com.github.leomartins1999.xmlify.model.ElementPredicate
 import com.github.leomartins1999.xmlify.model.LeafElement
 import com.github.leomartins1999.xmlify.model.TreeElement
 
-class ElementFinder(
+internal class ElementFinder(
     val element: Element,
     val predicate: ElementPredicate
 ) : ElementVisitor {

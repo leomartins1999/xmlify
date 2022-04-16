@@ -14,7 +14,7 @@ abstract class Element(val name: String, val attributes: Map<String, String>) {
     abstract fun accept(visitor: ElementVisitor)
 }
 
-data class LeafElement(
+data class LeafElement internal constructor(
     private val elementName: String,
     val value: Any? = null,
     private val elementAttributes: Map<String, String> = mapOf()
@@ -26,7 +26,7 @@ data class LeafElement(
     override fun accept(visitor: ElementVisitor): Unit = visitor.visit(this)
 }
 
-data class TreeElement(
+data class TreeElement internal constructor(
     private val elementName: String,
     val children: List<Element> = emptyList(),
     private val elementAttributes: Map<String, String> = mapOf()

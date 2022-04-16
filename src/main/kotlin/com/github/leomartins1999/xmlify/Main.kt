@@ -1,5 +1,8 @@
 package com.github.leomartins1999.xmlify
 
+import com.github.leomartins1999.xmlify.model.document
+import com.github.leomartins1999.xmlify.model.element
+
 fun main() {
     // simple element
     val element = element("potatoes")

@@ -6,7 +6,7 @@ import com.github.leomartins1999.xmlify.model.LeafPredicate
 import com.github.leomartins1999.xmlify.model.TreeElement
 import com.github.leomartins1999.xmlify.model.TreePredicate
 
-class ElementFilter(
+internal class ElementFilter(
     private val root: TreeElement,
     private val leafPredicate: LeafPredicate = { true },
     private val treePredicate: TreePredicate = { true }

@@ -6,10 +6,10 @@ import com.github.leomartins1999.xmlify.model.collapsedElementTemplate
 import com.github.leomartins1999.xmlify.model.treeElementEndTemplate
 import com.github.leomartins1999.xmlify.model.treeElementStartTemplate
 
-const val newline = "\n"
-const val tab = "\t"
+private const val newline = "\n"
+private const val tab = "\t"
 
-class TreeElementRenderer(
+internal class TreeElementRenderer(
     private val treeElement: TreeElement
 ) : ElementVisitor {
 
