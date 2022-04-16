@@ -7,7 +7,7 @@ on:
 
 jobs:
   Build:
-    name: PR Checks
+    name: Generate Docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Branch
