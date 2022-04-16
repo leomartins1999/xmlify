@@ -45,3 +45,7 @@ println(document.render())
     <name>Jane Doe</name>
  */
 ```
+
+## Documentation
+
+- KDocs: [link](https://leomartins1999.github.io/xmlify/index.html)
