@@ -19,6 +19,8 @@ plugins {
 dependencies {
     val junitVersion = "5.8.2"
 
+    implementation(kotlin("reflect"))
+
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
 }
 
