@@ -1,6 +1,7 @@
 package com.github.leomartins1999.xmlify.mapper
 
 import com.github.leomartins1999.xmlify.model.LeafElement
+import com.github.leomartins1999.xmlify.model.TreeElement
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -54,5 +55,37 @@ class MapperTests {
 
         assertEquals(1, element.children.size)
         assertEquals(LeafElement("name", null), element.children.first())
+    }
+
+    @Test
+    fun `maps object with nested object`() {
+        data class Address(val street: String, val number: Int)
+        data class Person(val address: Address)
+
+        val person = Person(Address("Saint John's Street", 13))
+
+        val element = xmlify { person }
+        assertEquals(1, element.children.size)
+
+        val nested = element.children.first()
+        assertEquals("address", nested.name)
+        assertTrue(nested is TreeElement)
+
+        val tree = nested as TreeElement
+        assertEquals(2, tree.children.size)
+        assertTrue(tree.children.contains(LeafElement("street", "Saint John's Street")))
+        assertTrue(tree.children.contains(LeafElement("number", 13)))
+    }
+
+    @Test
+    fun `maps object with nested null object`() {
+        data class Address(val street: String, val number: Int)
+        data class Person(val address: Address?)
+
+        val person = Person(null)
+
+        val element = xmlify { person }
+
+        assertEquals(TreeElement("address", listOf()), element.children.first())
     }
 }
