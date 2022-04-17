@@ -1,3 +1,5 @@
+package model
+
 import com.github.leomartins1999.xmlify.model.element
 
 fun leafElementExample() {
