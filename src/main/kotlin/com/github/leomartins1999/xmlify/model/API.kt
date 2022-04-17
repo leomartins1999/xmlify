@@ -24,7 +24,7 @@ fun element(
  * Creates an XML document
  */
 fun document(
-    element: LeafElement,
+    element: Element,
     version: XMLVersion = XMLVersion.V1_0,
     encoding: Charset = Charsets.UTF_8,
 ) = Document(version, encoding, element)

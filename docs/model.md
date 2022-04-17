@@ -73,4 +73,8 @@ Some special characters are encoded differently in XML:
 
 ## API
 
-Code examples can be found here: ...
+- [KDocs](https://leomartins1999.github.io/xmlify/xmlify/com.github.leomartins1999.xmlify.model/index.html)
+- Examples:
+  - [Leaf Element](../src/samples/kotlin/LeafElement.kt)
+  - [Tree Element](../src/samples/kotlin/TreeElement.kt)
+  - [Document](../src/samples/kotlin/Document.kt)

@@ -26,6 +26,11 @@ repositories {
     mavenCentral()
 }
 
+sourceSets.create("samples") {
+    java.srcDir("src/samples/kotlin")
+    compileClasspath += sourceSets.getByName("main").runtimeClasspath
+}
+
 tasks.test {
     useJUnitPlatform()
 }
