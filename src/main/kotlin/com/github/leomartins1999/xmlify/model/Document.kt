@@ -15,7 +15,7 @@ enum class XMLVersion(internal val value: String) {
 data class Document internal constructor(
     val version: XMLVersion,
     val encoding: Charset,
-    val element: LeafElement
+    val element: Element
 ) {
     /**
      * Renders the document as a String
