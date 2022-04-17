@@ -1,29 +1,35 @@
 package com.github.leomartins1999.xmlify.model.visitors
 
+import com.github.leomartins1999.xmlify.model.Element
 import com.github.leomartins1999.xmlify.model.LeafElement
 import com.github.leomartins1999.xmlify.model.TreeElement
 import com.github.leomartins1999.xmlify.model.collapsedElementTemplate
+import com.github.leomartins1999.xmlify.model.leafElementTemplate
 import com.github.leomartins1999.xmlify.model.treeElementEndTemplate
 import com.github.leomartins1999.xmlify.model.treeElementStartTemplate
 
 private const val newline = "\n"
 private const val tab = "\t"
 
-internal class TreeElementRenderer(
-    private val treeElement: TreeElement
+internal class ElementRenderer(
+    private val element: Element
 ) : ElementVisitor {
 
     private val output = mutableListOf<String>()
     private var depth = 0
 
     fun render(): String {
-        treeElement.accept(this)
+        element.accept(this)
 
         return output.joinToString(separator = newline)
     }
 
     override fun visit(element: LeafElement) {
-        appendToOutput(element.render())
+        val str =
+            if (element.value != null) leafElementTemplate(element)
+            else collapsedElementTemplate(element)
+
+        appendToOutput(str)
     }
 
     override fun visit(element: TreeElement) =
