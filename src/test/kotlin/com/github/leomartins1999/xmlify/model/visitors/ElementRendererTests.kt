@@ -6,7 +6,7 @@ import com.github.leomartins1999.xmlify.model.TreeElement
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class TreeElementRendererTests {
+class ElementRendererTests {
 
     @Test
     fun `renders an empty tree element`() {
@@ -16,7 +16,7 @@ class TreeElementRendererTests {
 
         val expected = "<root/>"
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -33,7 +33,7 @@ class TreeElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -50,7 +50,7 @@ class TreeElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -73,7 +73,7 @@ class TreeElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -90,7 +90,7 @@ class TreeElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -118,7 +118,7 @@ class TreeElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -163,7 +163,7 @@ class TreeElementRendererTests {
             </person>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -177,7 +177,7 @@ class TreeElementRendererTests {
 
         val expected = "<root language=\"PT\"/>"
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -195,7 +195,7 @@ class TreeElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -213,7 +213,7 @@ class TreeElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
@@ -227,7 +227,7 @@ class TreeElementRendererTests {
 
         val expected = "<myElement chars=\"&quot; &apos; &lt; &gt; &amp;\"/>"
 
-        val result = TreeElementRenderer(element).render()
+        val result = ElementRenderer(element).render()
 
         assertEquals(expected, result)
     }
