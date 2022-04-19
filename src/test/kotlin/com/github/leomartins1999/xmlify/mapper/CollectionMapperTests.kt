@@ -21,11 +21,11 @@ class CollectionMapperTests {
         assertTrue(
             element.children.containsAll(
                 listOf(
-                    LeafElement("Int", 1),
-                    LeafElement("Int", 2),
-                    LeafElement("Int", 3),
-                    LeafElement("Int", 4),
-                    LeafElement("Int", 5)
+                    LeafElement("int", 1),
+                    LeafElement("int", 2),
+                    LeafElement("int", 3),
+                    LeafElement("int", 4),
+                    LeafElement("int", 5)
                 )
             )
         )
@@ -46,9 +46,9 @@ class CollectionMapperTests {
         assertTrue(
             element.children.containsAll(
                 listOf(
-                    TreeElement("Person", listOf(LeafElement("name", "John"))),
-                    TreeElement("Person", listOf(LeafElement("name", "Jane"))),
-                    TreeElement("Person", listOf(LeafElement("name", "Joe")))
+                    TreeElement("person", listOf(LeafElement("name", "John"))),
+                    TreeElement("person", listOf(LeafElement("name", "Jane"))),
+                    TreeElement("person", listOf(LeafElement("name", "Joe")))
                 )
             )
         )
