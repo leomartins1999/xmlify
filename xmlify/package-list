@@ -1,7 +1,7 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:com.github.leomartins1999.xmlify.mapper////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/index.html
-$dokka.location:com.github.leomartins1999.xmlify.mapper//xmlify/#kotlin.Function0[kotlin.Any]/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/xmlify.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper//xmlify/#kotlin.Function0[kotlin.Any?]/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/xmlify.html
 $dokka.location:com.github.leomartins1999.xmlify.model.visitors////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model.visitors/index.html
 $dokka.location:com.github.leomartins1999.xmlify.model.visitors/ElementVisitor///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model.visitors/-element-visitor/index.html
 $dokka.location:com.github.leomartins1999.xmlify.model.visitors/ElementVisitor/endVisit/#com.github.leomartins1999.xmlify.model.TreeElement/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model.visitors/-element-visitor/end-visit.html
