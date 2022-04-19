@@ -1,5 +1,6 @@
 package mapper
 
+import com.github.leomartins1999.xmlify.mapper.annotations.XMLIgnore
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLName
 
 /**
@@ -16,5 +17,6 @@ data class Entity(
  */
 data class Client(
     val id: String,
+    @XMLIgnore
     val secret: String
 )
