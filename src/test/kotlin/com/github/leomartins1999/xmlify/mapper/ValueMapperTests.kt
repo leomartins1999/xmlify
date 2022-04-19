@@ -14,7 +14,7 @@ class ValueMapperTests {
         assertEquals(LeafElement::class, element::class)
 
         element as LeafElement
-        assertEquals("String", element.name)
+        assertEquals("string", element.name)
         assertEquals(value, element.value)
     }
 
@@ -26,7 +26,7 @@ class ValueMapperTests {
         assertEquals(LeafElement::class, element::class)
 
         element as LeafElement
-        assertEquals("Float", element.name)
+        assertEquals("float", element.name)
         assertEquals(value, element.value)
     }
 
@@ -38,7 +38,7 @@ class ValueMapperTests {
         assertEquals(LeafElement::class, element::class)
 
         element as LeafElement
-        assertEquals("Int", element.name)
+        assertEquals("int", element.name)
         assertEquals(value, element.value)
     }
 
@@ -50,7 +50,7 @@ class ValueMapperTests {
         assertEquals(LeafElement::class, element::class)
 
         element as LeafElement
-        assertEquals("Boolean", element.name)
+        assertEquals("boolean", element.name)
         assertEquals(value, element.value)
     }
 }

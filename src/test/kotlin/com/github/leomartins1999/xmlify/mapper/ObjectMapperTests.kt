@@ -18,7 +18,7 @@ class ObjectMapperTests {
         assertEquals(TreeElement::class, element::class)
 
         element as TreeElement
-        assertEquals("Person", element.name)
+        assertEquals("person", element.name)
         assertEquals(1, element.children.size)
         assertEquals(LeafElement("name", "John Doe"), element.children.first())
     }
@@ -33,7 +33,7 @@ class ObjectMapperTests {
         assertEquals(TreeElement::class, element::class)
 
         element as TreeElement
-        assertEquals("Person", element.name)
+        assertEquals("person", element.name)
         assertEquals(3, element.children.size)
         assertTrue(
             element.children.containsAll(
@@ -56,7 +56,7 @@ class ObjectMapperTests {
         assertEquals(TreeElement::class, element::class)
 
         element as TreeElement
-        assertEquals("Person", element.name)
+        assertEquals("person", element.name)
         assertEquals(1, element.children.size)
         assertEquals(LeafElement("name", null), element.children.first())
     }
@@ -94,15 +94,15 @@ class ObjectMapperTests {
         assertEquals(TreeElement::class, element::class)
 
         element as TreeElement
-        assertEquals("Workweek", element.name)
+        assertEquals("workweek", element.name)
         assertTrue(
             element.children.contains(
                 TreeElement(
                     "days",
                     listOf(
-                        LeafElement("String", "Sunday"),
-                        LeafElement("String", "Tuesday"),
-                        LeafElement("String", "Wednesday")
+                        LeafElement("string", "Sunday"),
+                        LeafElement("string", "Tuesday"),
+                        LeafElement("string", "Wednesday")
                     )
                 )
             )

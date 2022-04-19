@@ -16,6 +16,6 @@ class EnumMapperTests {
 
         val element = xmlify { dir }
 
-        assertEquals(LeafElement("Direction", "NORTH"), element)
+        assertEquals(LeafElement("direction", "NORTH"), element)
     }
 }
