@@ -1,5 +1,6 @@
 package com.github.leomartins1999.xmlify.mapper
 
+import com.github.leomartins1999.xmlify.mapper.strategies.CollectionMappingStrategy
 import com.github.leomartins1999.xmlify.mapper.strategies.ObjectMappingStrategy
 import com.github.leomartins1999.xmlify.mapper.strategies.ValueMappingStrategy
 import com.github.leomartins1999.xmlify.model.Element
@@ -17,8 +18,11 @@ internal fun toElement(instance: Any?): Element {
 
 private fun selectStrategy(instance: Any) = when {
     isValueType(instance::class) -> ValueMappingStrategy
+    isCollection(instance::class) -> CollectionMappingStrategy
     else -> ObjectMappingStrategy
 }
 
 private fun isValueType(type: KClass<*>) =
     type.isSubclassOf(Number::class) || type == String::class || type == Boolean::class
+
+private fun isCollection(type: KClass<*>) = type.isSubclassOf(Collection::class)

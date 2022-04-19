@@ -83,4 +83,29 @@ class ObjectMapperTests {
         assertTrue(tree.children.contains(LeafElement("street", "Saint John's Street")))
         assertTrue(tree.children.contains(LeafElement("number", 13)))
     }
+
+    @Test
+    fun `maps an object with a nested collection`() {
+        data class Workweek(val days: List<String>)
+
+        val workweek = Workweek(listOf("Sunday", "Tuesday", "Wednesday"))
+
+        val element = xmlify { workweek }
+        assertEquals(TreeElement::class, element::class)
+
+        element as TreeElement
+        assertEquals("Workweek", element.name)
+        assertTrue(
+            element.children.contains(
+                TreeElement(
+                    "days",
+                    listOf(
+                        LeafElement("String", "Sunday"),
+                        LeafElement("String", "Tuesday"),
+                        LeafElement("String", "Wednesday")
+                    )
+                )
+            )
+        )
+    }
 }
