@@ -1,5 +1,8 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/CollectionMappingStrategy///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-collection-mapping-strategy/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/CollectionMappingStrategy/toElement/#kotlin.Any/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-collection-mapping-strategy/to-element.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper//xmlify/#kotlin.Function0[kotlin.Any?]/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/xmlify.html
 $dokka.location:com.github.leomartins1999.xmlify.model.visitors////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model.visitors/index.html
@@ -36,6 +39,7 @@ $dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion.V1_1///Pointin
 $dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion.V2_0///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}xmlify/com.github.leomartins1999.xmlify.model/-x-m-l-version/-v2_0/index.html
 $dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model/-x-m-l-version/index.html
 com.github.leomartins1999.xmlify.mapper
+com.github.leomartins1999.xmlify.mapper.strategies
 com.github.leomartins1999.xmlify.model
 com.github.leomartins1999.xmlify.model.visitors
 
