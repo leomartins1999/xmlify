@@ -3,6 +3,8 @@ $dokka.linkExtension:html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.strategies////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/CollectionMappingStrategy///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-collection-mapping-strategy/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/CollectionMappingStrategy/toElement/#kotlin.Any/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-collection-mapping-strategy/to-element.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/EnumMappingStrategy///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-enum-mapping-strategy/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/EnumMappingStrategy/toElement/#kotlin.Any/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-enum-mapping-strategy/to-element.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper//xmlify/#kotlin.Function0[kotlin.Any?]/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/xmlify.html
 $dokka.location:com.github.leomartins1999.xmlify.model.visitors////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model.visitors/index.html
