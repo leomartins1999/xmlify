@@ -18,5 +18,4 @@ class EnumMapperTests {
 
         assertEquals(LeafElement("Direction", "NORTH"), element)
     }
-
 }
