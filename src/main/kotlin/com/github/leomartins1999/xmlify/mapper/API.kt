@@ -1,6 +1,6 @@
 package com.github.leomartins1999.xmlify.mapper
 
 /**
- * Maps an object to a Tree Element
+ * Maps an object to an Element
  */
-fun xmlify(supplier: () -> Any) = toTreeElement(supplier())
+fun xmlify(supplier: () -> Any?) = toElement(supplier())
