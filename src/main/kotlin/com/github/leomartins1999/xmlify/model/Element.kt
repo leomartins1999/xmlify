@@ -23,6 +23,11 @@ abstract class Element(val name: String, val attributes: Map<String, String>) {
      * Renders the element as a String
      */
     fun render() = ElementRenderer(this).render()
+
+    /**
+     * This is being added so that it can be used in ObjectMappingStrategy
+     */
+    internal abstract fun copyWithName(name: String): Element
 }
 
 /**
@@ -34,6 +39,7 @@ data class LeafElement internal constructor(
     private val elementAttributes: Map<String, String> = mapOf()
 ) : Element(elementName, elementAttributes) {
     override fun accept(visitor: ElementVisitor): Unit = visitor.visit(this)
+    override fun copyWithName(name: String) = copy(elementName = name)
 }
 
 /**
@@ -68,4 +74,6 @@ data class TreeElement internal constructor(
 
         visitor.endVisit(this)
     }
+
+    override fun copyWithName(name: String) = copy(elementName = name)
 }
