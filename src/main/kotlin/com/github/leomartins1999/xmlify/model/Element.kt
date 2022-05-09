@@ -24,6 +24,12 @@ abstract class Element(val name: String, val attributes: Map<String, String>) {
      */
     fun render() = ElementRenderer(this).render()
 
+    /**
+     * Copies the element to another instance
+     * Name and attributes can be redefined
+     * This is being added as it is useful in the
+     * mapper module
+     */
     internal abstract fun copyElement(
         name: String? = null,
         attributes: Map<String, String>? = null
