@@ -11,3 +11,13 @@ annotation class XMLName(val name: String)
  */
 @Target(AnnotationTarget.PROPERTY)
 annotation class XMLIgnore
+
+/**
+ * Adds an attribute to elements
+ * (works with classes and properties)
+ */
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
+@Repeatable
+annotation class XMLAttribute(val key: String, val value: String)
+
+internal fun List<XMLAttribute>.toAttributes() = associateBy({ it.key }, { it.value })

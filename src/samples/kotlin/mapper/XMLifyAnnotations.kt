@@ -1,5 +1,6 @@
 package mapper
 
+import com.github.leomartins1999.xmlify.mapper.annotations.XMLAttribute
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLIgnore
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLName
 
@@ -19,4 +20,16 @@ data class Client(
     val id: String,
     @XMLIgnore
     val secret: String
+)
+
+/**
+ * Attributes can be defined for both
+ * classes and class properties
+ * Multiple attributes can be defined
+ */
+@XMLAttribute("brand", "BMW")
+@XMLAttribute("model", "X1")
+data class Car(
+    @XMLAttribute("originCountry", "Germany")
+    val factoryNumber: String
 )
