@@ -1,13 +1,16 @@
 package com.github.leomartins1999.xmlify.mapper.strategies
 
+import com.github.leomartins1999.xmlify.mapper.annotations.XMLAttribute
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLIgnore
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLName
+import com.github.leomartins1999.xmlify.mapper.annotations.toAttributes
 import com.github.leomartins1999.xmlify.mapper.getName
 import com.github.leomartins1999.xmlify.mapper.xmlify
 import com.github.leomartins1999.xmlify.model.Element
 import com.github.leomartins1999.xmlify.model.element
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.findAnnotation
+import kotlin.reflect.full.findAnnotations
 import kotlin.reflect.full.hasAnnotation
 
 internal object ObjectMappingStrategy : MappingStrategy {
@@ -26,10 +29,16 @@ internal object ObjectMappingStrategy : MappingStrategy {
 
     private fun KProperty<*>.toElement(instance: Any): Element {
         val name = getName()
+        val attributes = getAttributes()
         val value = getter.call(instance)
 
-        return xmlify { value }.copyWithName(name)
+        val element = xmlify { value }
+
+        return element.copyElement(name, attributes)
     }
 
     private fun KProperty<*>.getName() = findAnnotation<XMLName>()?.name ?: name
+
+    @OptIn(ExperimentalStdlibApi::class)
+    private fun KProperty<*>.getAttributes() = findAnnotations<XMLAttribute>().toAttributes()
 }

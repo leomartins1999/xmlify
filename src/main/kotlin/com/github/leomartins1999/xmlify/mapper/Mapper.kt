@@ -14,7 +14,10 @@ private val nullElement = element("null")
 internal fun toElement(instance: Any?): Element {
     if (instance == null) return nullElement
 
-    return selectStrategy(instance).toElement(instance)
+    val element = selectStrategy(instance).toElement(instance)
+    val attributes = instance::class.getAttributes()
+
+    return element.copyElement(attributes = attributes)
 }
 
 private fun selectStrategy(instance: Any) = when {
