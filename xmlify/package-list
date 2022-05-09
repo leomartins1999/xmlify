@@ -1,6 +1,10 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLAttribute///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-attribute/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLAttribute/XMLAttribute/#kotlin.String#kotlin.String/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-attribute/-x-m-l-attribute.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLAttribute/key/#/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-attribute/key.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLAttribute/value/#/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-attribute/value.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLIgnore///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-ignore/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLIgnore/XMLIgnore/#/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-ignore/-x-m-l-ignore.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLName///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-name/index.html
