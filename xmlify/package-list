@@ -7,9 +7,15 @@ $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLAttribute
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLAttribute/value/#/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-attribute/value.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLIgnore///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-ignore/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLIgnore/XMLIgnore/#/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-ignore/-x-m-l-ignore.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLMapper///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-mapper/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLMapper/XMLMapper/#kotlin.reflect.KClass[com.github.leomartins1999.xmlify.mapper.strategies.MappingStrategy]/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-mapper/-x-m-l-mapper.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLMapper/strategyClass/#/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-mapper/strategy-class.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLName///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-name/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLName/XMLName/#kotlin.String/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-name/-x-m-l-name.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper.annotations/XMLName/name/#/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.annotations/-x-m-l-name/name.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/MappingStrategy///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-mapping-strategy/index.html
+$dokka.location:com.github.leomartins1999.xmlify.mapper.strategies/MappingStrategy/toElement/#kotlin.Any/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper.strategies/-mapping-strategy/to-element.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/index.html
 $dokka.location:com.github.leomartins1999.xmlify.mapper//xmlify/#kotlin.Function0[kotlin.Any?]/PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.mapper/xmlify.html
 $dokka.location:com.github.leomartins1999.xmlify.model.visitors////PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model.visitors/index.html
@@ -47,6 +53,7 @@ $dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion.V2_0///Pointin
 $dokka.location:com.github.leomartins1999.xmlify.model/XMLVersion///PointingToDeclaration/xmlify/com.github.leomartins1999.xmlify.model/-x-m-l-version/index.html
 com.github.leomartins1999.xmlify.mapper
 com.github.leomartins1999.xmlify.mapper.annotations
+com.github.leomartins1999.xmlify.mapper.strategies
 com.github.leomartins1999.xmlify.model
 com.github.leomartins1999.xmlify.model.visitors
 
