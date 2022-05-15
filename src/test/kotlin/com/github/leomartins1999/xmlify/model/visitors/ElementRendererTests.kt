@@ -16,7 +16,7 @@ class ElementRendererTests {
 
         val expected = "<root/>"
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -33,7 +33,7 @@ class ElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -50,7 +50,7 @@ class ElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -73,7 +73,7 @@ class ElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -90,7 +90,7 @@ class ElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -118,7 +118,7 @@ class ElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -163,7 +163,7 @@ class ElementRendererTests {
             </person>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -177,7 +177,7 @@ class ElementRendererTests {
 
         val expected = "<root language=\"PT\"/>"
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -195,7 +195,7 @@ class ElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -213,7 +213,7 @@ class ElementRendererTests {
             </root>
         """.trimIndent()
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }
@@ -227,7 +227,7 @@ class ElementRendererTests {
 
         val expected = "<myElement chars=\"&quot; &apos; &lt; &gt; &amp;\"/>"
 
-        val result = ElementRenderer(element).render()
+        val result = element.render()
 
         assertEquals(expected, result)
     }

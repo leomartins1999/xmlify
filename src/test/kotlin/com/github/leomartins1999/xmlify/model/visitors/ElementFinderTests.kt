@@ -12,7 +12,7 @@ class ElementFinderTests {
     fun `finds no elements when tree element is collapsed and does not match filter`() {
         val element = TreeElement("myElement")
 
-        val result = ElementFinder(element) { it.name == "otherElement" }.find()
+        val result = element.find(treePredicate = { it.name == "otherElement" })
 
         assertEquals(emptyList<Element>(), result)
     }
@@ -21,7 +21,7 @@ class ElementFinderTests {
     fun `finds itself if it matches the filter`() {
         val element = TreeElement("myElement")
 
-        val result = ElementFinder(element) { it.name == "myElement" }.find()
+        val result = element.find(treePredicate = { it.name == "myElement" })
 
         assertEquals(listOf(element), result)
     }
@@ -32,7 +32,7 @@ class ElementFinderTests {
 
         val root = TreeElement("root", listOf(leaf))
 
-        val result = ElementFinder(root) { it is LeafElement && it.value == leaf.value }.find()
+        val result = root.find(leafPredicate = { it.value == leaf.value })
 
         assertEquals(listOf(leaf), result)
     }
@@ -50,7 +50,7 @@ class ElementFinderTests {
 
         val root = TreeElement("root", listOf(tree))
 
-        val result = ElementFinder(root) { it is TreeElement && it.children.size == 3 }.find()
+        val result = root.find(treePredicate = { it.children.size == 3 })
 
         assertEquals(listOf(tree), result)
     }
@@ -63,7 +63,7 @@ class ElementFinderTests {
 
         val root = TreeElement("root", listOf(tree, tree, tree))
 
-        val result = ElementFinder(root) { it.name == leaf.name }.find()
+        val result = root.find(leafPredicate = { it.name == leaf.name })
 
         assertEquals(3, result.size)
         assertEquals(listOf(leaf, leaf, leaf), result)

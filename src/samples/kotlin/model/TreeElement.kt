@@ -26,7 +26,7 @@ fun treeElementExample() {
      * You can use the .find() function to fetch elements in a tree
      * that match the predicate
      */
-    root.find { it.name == "leaf1" }
+    root.find(leafPredicate = { it.name == "leaf1" })
 
     /**
      * You can use the .filter() function to duplicate the root element

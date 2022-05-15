@@ -18,7 +18,7 @@ class ElementFilterTests {
             )
         )
 
-        val result = ElementFilter(root).filter()
+        val result = root.filter()
 
         assertEquals(root, result)
     }
@@ -34,10 +34,7 @@ class ElementFilterTests {
             )
         )
 
-        val result = ElementFilter(
-            root,
-            leafPredicate = { it.value == true }
-        ).filter()
+        val result = root.filter(leafPredicate = { it.value == true })
 
         assertEquals(listOf(LeafElement("boolean", true)), result.children)
     }
@@ -53,10 +50,7 @@ class ElementFilterTests {
             )
         )
 
-        val result = ElementFilter(
-            root,
-            treePredicate = { it.name == "collapsed" }
-        ).filter()
+        val result = root.filter(treePredicate = { it.name == "collapsed" })
 
         assertEquals(listOf(TreeElement("collapsed")), result.children)
     }
@@ -83,10 +77,7 @@ class ElementFilterTests {
             )
         )
 
-        val result = ElementFilter(
-            root,
-            leafPredicate = { it.name.contains("2") }
-        ).filter()
+        val result = root.filter(leafPredicate = { it.name.contains("2") })
 
         assertEquals(
             listOf(
@@ -128,10 +119,7 @@ class ElementFilterTests {
             )
         )
 
-        val result = ElementFilter(
-            root,
-            treePredicate = { it.name.contains("1") }
-        ).filter()
+        val result = root.filter(treePredicate = { it.name.contains("1") })
 
         assertEquals(
             listOf(
@@ -163,11 +151,10 @@ class ElementFilterTests {
             )
         )
 
-        val result = ElementFilter(
-            root,
+        val result = root.filter(
             leafPredicate = { it.name == "booleanLeaf" },
             treePredicate = { it.children.isNotEmpty() }
-        ).filter()
+        )
 
         assertEquals(
             listOf(
