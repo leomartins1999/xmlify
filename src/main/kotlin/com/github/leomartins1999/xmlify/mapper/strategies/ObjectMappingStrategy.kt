@@ -2,7 +2,9 @@ package com.github.leomartins1999.xmlify.mapper.strategies
 
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLAttribute
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLIgnore
+import com.github.leomartins1999.xmlify.mapper.annotations.XMLMapper
 import com.github.leomartins1999.xmlify.mapper.annotations.XMLName
+import com.github.leomartins1999.xmlify.mapper.annotations.instantiateMapper
 import com.github.leomartins1999.xmlify.mapper.annotations.toAttributes
 import com.github.leomartins1999.xmlify.mapper.getName
 import com.github.leomartins1999.xmlify.mapper.xmlify
@@ -32,7 +34,7 @@ internal object ObjectMappingStrategy : MappingStrategy {
         val attributes = getAttributes()
         val value = getter.call(instance)
 
-        val element = xmlify { value }
+        val element = mapElement(value)
 
         return element.copyElement(name, attributes)
     }
@@ -41,4 +43,15 @@ internal object ObjectMappingStrategy : MappingStrategy {
 
     @OptIn(ExperimentalStdlibApi::class)
     private fun KProperty<*>.getAttributes() = findAnnotations<XMLAttribute>().toAttributes()
+
+    private fun KProperty<*>.mapElement(any: Any?): Element {
+        if (any == null) return xmlify { null }
+
+        return getCustomMapper()
+            ?.instantiateMapper()
+            ?.toElement(any)
+            ?: xmlify { any }
+    }
+
+    private fun KProperty<*>.getCustomMapper() = findAnnotation<XMLMapper>()?.strategyClass
 }

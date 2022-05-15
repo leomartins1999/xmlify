@@ -4,7 +4,11 @@ import com.github.leomartins1999.xmlify.mapper.getName
 import com.github.leomartins1999.xmlify.model.Element
 import com.github.leomartins1999.xmlify.model.element
 
-internal interface MappingStrategy {
+/**
+ * Implementers of this interface are capable
+ * of turning an object instance to an Element
+ */
+interface MappingStrategy {
     fun toElement(instance: Any): Element
 }
 
