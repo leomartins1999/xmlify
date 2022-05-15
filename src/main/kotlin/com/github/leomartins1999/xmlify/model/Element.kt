@@ -5,7 +5,6 @@ import com.github.leomartins1999.xmlify.model.visitors.ElementFinder
 import com.github.leomartins1999.xmlify.model.visitors.ElementRenderer
 import com.github.leomartins1999.xmlify.model.visitors.ElementVisitor
 
-typealias ElementPredicate = (Element) -> Boolean
 typealias LeafPredicate = (LeafElement) -> Boolean
 typealias TreePredicate = (TreeElement) -> Boolean
 
@@ -66,7 +65,10 @@ data class TreeElement internal constructor(
      * Finds nested elements that match the given predicate
      * Also returns elements nested inside children elements (children inside children elements)
      */
-    fun find(filter: ElementPredicate) = ElementFinder(this, filter).find()
+    fun find(
+        leafPredicate: LeafPredicate = { false },
+        treePredicate: TreePredicate = { false }
+    ) = ElementFinder(this, leafPredicate, treePredicate).find()
 
     /**
      * Filters nested elements by the given predicates
