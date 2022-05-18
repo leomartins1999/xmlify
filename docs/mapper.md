@@ -28,7 +28,7 @@ val objectElement = xmlify { player }
 - enumerates
 - collections
 
-Samples: [API](../src/samples/kotlin/mapper/XMLify.kt) 
+Samples: [API](../core/src/samples/kotlin/mapper/XMLify.kt) 
 
 ### xmlify annotations
 
@@ -38,11 +38,11 @@ Samples: [API](../src/samples/kotlin/mapper/XMLify.kt)
 - `@XMLAttribute`, which adds the specified attributes to the element. This can be specified both for classes and class properties
 - `@XMLMapper`, which allows you to define a custom mapper to map the element. This can be specified both for classes and class properties
 
-Samples: [Annotations](../src/samples/kotlin/mapper/XMLifyAnnotations.kt) 
+Samples: [Annotations](../core/src/samples/kotlin/mapper/XMLifyAnnotations.kt) 
 
 ### API
 
 - [KDocs](https://leomartins1999.github.io/xmlify/xmlify/com.github.leomartins1999.xmlify.mapper/index.html)
 - Examples:
-    - [API](../src/samples/kotlin/mapper/XMLify.kt)
-    - [Annotations](../src/samples/kotlin/mapper/XMLifyAnnotations.kt)
+    - [API](../core/src/samples/kotlin/mapper/XMLify.kt)
+    - [Annotations](../core/src/samples/kotlin/mapper/XMLifyAnnotations.kt)

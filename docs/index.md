@@ -18,5 +18,5 @@ xmlify is composed by 1 module:
 ## Resources
 - [KDocs](https://leomartins1999.github.io/xmlify)
 - Samples:
-  - [model module](../src/samples/kotlin/model)
-  - [mapper module](../src/samples/kotlin/mapper)
+  - [model module](../core/src/samples/kotlin/model)
+  - [mapper module](../core/src/samples/kotlin/mapper)
