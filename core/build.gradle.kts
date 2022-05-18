@@ -7,13 +7,14 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 plugins {
     val testLoggerVersion = "3.2.0"
     val ktlintVersion = "10.2.1"
-    val kotlinVersion = "1.6.20"
+    val kotlinVersion = "1.6.21"
 
     id("com.adarshr.test-logger") version testLoggerVersion
     id("org.jlleitschuh.gradle.ktlint") version ktlintVersion
     id("org.jetbrains.dokka") version kotlinVersion
 
     kotlin("jvm") version kotlinVersion
+    `java-library`
 }
 
 dependencies {
