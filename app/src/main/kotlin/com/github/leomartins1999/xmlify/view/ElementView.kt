@@ -25,11 +25,22 @@ class ElementView(
         super.paintComponent(g)
 
         paintTitle(g)
+        paintAttributes(g)
     }
 
     private fun paintTitle(g: Graphics) {
         g.font = titleFont
         g.drawString(element.name, 10, 20)
+    }
+
+    private fun paintAttributes(g: Graphics) {
+        g.font = titleFont
+        g.drawString("Attributes:", 20, 50)
+
+        element.attributes.onEachIndexed { idx, (k, v) ->
+            g.font = textFont
+            g.drawString("$k: $v", 20, 65 + idx * 12)
+        }
     }
 
     private companion object {
@@ -38,6 +49,7 @@ class ElementView(
             createLineBorder(Color.BLUE, 2, true)
         )
         private val titleFont = Font("Arial", Font.BOLD, 16)
+        private val textFont = Font("Arial", Font.PLAIN, 12)
     }
 
 }

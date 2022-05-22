@@ -8,7 +8,13 @@ class Model(
         get() = root
 
     private companion object {
-        private val defaultElement = element("myElement")
+        private val defaultElement = element(
+            name = "myElement",
+            attributes = mapOf(
+                "key1" to "value1",
+                "key2" to "value2"
+            )
+        )
     }
 
 }
