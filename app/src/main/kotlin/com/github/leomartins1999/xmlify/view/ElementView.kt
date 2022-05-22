@@ -26,6 +26,7 @@ class ElementView(
 
         paintTitle(g)
         paintAttributes(g)
+        paintValue(g)
     }
 
     private fun paintTitle(g: Graphics) {
@@ -41,6 +42,14 @@ class ElementView(
             g.font = textFont
             g.drawString("$k: $v", 20, 65 + idx * 12)
         }
+    }
+
+    private fun paintValue(g: Graphics) {
+        g.font = titleFont
+        g.drawString("Value:", 140, 50)
+
+        g.font = textFont
+        g.drawString("Some string", 140, 65)
     }
 
     private companion object {
