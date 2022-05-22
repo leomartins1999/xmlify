@@ -22,6 +22,4 @@ class ModelTests {
 
         assertEquals(element, model.element)
     }
-
-
 }
