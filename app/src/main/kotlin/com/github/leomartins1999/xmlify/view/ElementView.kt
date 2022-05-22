@@ -60,5 +60,4 @@ class ElementView(
         private val titleFont = Font("Arial", Font.BOLD, 16)
         private val textFont = Font("Arial", Font.PLAIN, 12)
     }
-
 }

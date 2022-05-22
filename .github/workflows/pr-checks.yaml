@@ -18,4 +18,4 @@ jobs:
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         with:
-          files: "core/build/test-results/test/*.xml"
+          files: "**/build/test-results/test/*.xml"

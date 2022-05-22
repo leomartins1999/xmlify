@@ -32,5 +32,4 @@ class View(
         private const val windowTitle = "xmlify-app"
         private val windowDimension = Dimension(300, 300)
     }
-
 }
