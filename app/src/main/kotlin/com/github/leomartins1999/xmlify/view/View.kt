@@ -20,12 +20,7 @@ class View(
         defaultCloseOperation = EXIT_ON_CLOSE
         size = windowDimension
 
-        renderElement()
-    }
-
-    private fun renderElement() {
-        val view = ElementView(model.element)
-        add(view)
+        add(ElementView(model.element))
     }
 
     private companion object {
