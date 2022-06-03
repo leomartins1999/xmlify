@@ -1,21 +1,23 @@
 package com.github.leomartins1999.xmlify.view
 
-import com.github.leomartins1999.xmlify.model.TreeElement
+import com.github.leomartins1999.xmlify.Controller
+import com.github.leomartins1999.xmlify.model.ModelTreeElement
 import javax.swing.BorderFactory.createTitledBorder
 import javax.swing.BoxLayout
 import javax.swing.JPanel
 
-class TreeElementContentPanel(private val treeElement: TreeElement) : JPanel() {
+class TreeElementContentPanel(
+    private val controller: Controller,
+    treeElement: ModelTreeElement
+) : JPanel() {
 
     init {
-        render()
-    }
-
-    private fun render() {
         layout = BoxLayout(this, BoxLayout.PAGE_AXIS)
         border = panelBorder
 
-        treeElement.children.forEach { add(ElementView(it)) }
+        controller
+            .getChildren(treeElement.elementId)
+            .forEach { add(ElementView(controller, it)) }
     }
 
     private companion object {

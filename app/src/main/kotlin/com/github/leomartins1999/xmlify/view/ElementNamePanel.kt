@@ -1,19 +1,24 @@
 package com.github.leomartins1999.xmlify.view
 
+import com.github.leomartins1999.xmlify.model.ElementObserver
+import com.github.leomartins1999.xmlify.model.ModelElement
 import javax.swing.BorderFactory.createTitledBorder
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class ElementNamePanel(private val elementName: String) : JPanel() {
+class ElementNamePanel(element: ModelElement<*>) : JPanel(), ElementObserver {
+
+    private val label = JLabel(element.element.name)
 
     init {
-        render()
+        border = panelBorder
+        add(label)
+
+        element.subscribe(this)
     }
 
-    private fun render() {
-        border = panelBorder
-
-        add(JLabel(elementName))
+    override fun onChangeName(newName: String) {
+        label.text = newName
     }
 
     private companion object {
