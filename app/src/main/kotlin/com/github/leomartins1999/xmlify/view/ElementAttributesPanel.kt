@@ -1,26 +1,20 @@
 package com.github.leomartins1999.xmlify.view
 
+import com.github.leomartins1999.xmlify.model.ModelElement
 import javax.swing.BorderFactory.createTitledBorder
 import javax.swing.JPanel
 import javax.swing.JTable
 
-class ElementAttributesPanel(private val attributes: Map<String, String>) : JPanel() {
+class ElementAttributesPanel(element: ModelElement<*>) : JPanel() {
+
+    private val attributesTable = buildAttributesTable(element.element.attributes)
 
     init {
-        render()
-    }
-
-    private fun render() {
         border = panelBorder
-
-        add(buildAttributesTable())
+        add(attributesTable)
     }
 
-    private fun buildAttributesTable() =
-        JTable(
-            attributes.toKeyValueArray(),
-            columns
-        )
+    private fun buildAttributesTable(attributes: Map<String, String>) = JTable(attributes.toKeyValueArray(), columns)
 
     private fun Map<String, String>.toKeyValueArray() = map { arrayOf(it.key, it.value) }.toTypedArray()
 

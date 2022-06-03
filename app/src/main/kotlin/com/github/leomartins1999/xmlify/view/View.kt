@@ -1,26 +1,20 @@
 package com.github.leomartins1999.xmlify.view
 
-import com.github.leomartins1999.xmlify.model.Model
+import com.github.leomartins1999.xmlify.Controller
 import java.awt.Dimension
 import javax.swing.JFrame
 
-class View(
-    private val model: Model
-) : JFrame(windowTitle) {
+class View(controller: Controller) : JFrame(windowTitle) {
 
     init {
-        render()
+        defaultCloseOperation = EXIT_ON_CLOSE
+        size = windowDimension
+
+        add(ElementView(controller, controller.getRoot()))
     }
 
     fun start() {
         isVisible = true
-    }
-
-    private fun render() {
-        defaultCloseOperation = EXIT_ON_CLOSE
-        size = windowDimension
-
-        add(ElementView(model.element))
     }
 
     private companion object {
