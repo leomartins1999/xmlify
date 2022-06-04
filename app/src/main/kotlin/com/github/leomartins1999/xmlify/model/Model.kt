@@ -50,6 +50,12 @@ class Model(
         parent.removeChild(elementId, elem.element)
     }
 
+    fun updateValue(elementId: ElementID, newValue: Any) {
+        val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
+
+        elem as ModelLeafElement
+        elem.updateValue(newValue)
+    }
     private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
         val modelElem = appendToStore(root, previousElementId)
 
