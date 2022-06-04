@@ -18,7 +18,7 @@ class LeafElementContentPanel(leafElement: ModelLeafElement) : JPanel(), Element
         leafElement.subscribe(this)
     }
 
-    override fun onUpdateValue(newValue: Any) {
+    override fun onUpdateValue(newValue: Any?) {
         valueLabel.text = newValue.toString()
     }
 

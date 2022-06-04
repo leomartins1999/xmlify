@@ -4,33 +4,37 @@ import com.github.leomartins1999.xmlify.Controller
 import com.github.leomartins1999.xmlify.model.ElementObserver
 import com.github.leomartins1999.xmlify.model.ModelElement
 import com.github.leomartins1999.xmlify.model.ModelLeafElement
-import com.github.leomartins1999.xmlify.model.ModelTreeElement
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
+
+typealias Action = () -> Unit
 
 class ElementPopupMenu(
     private val controller: Controller,
     private val element: ModelElement<*>
 ) : JPopupMenu(), ElementObserver {
 
-    private val menuHeader = JMenuItem(getHeaderText(element.element.name)).apply { isEnabled = false }
-
-    private val menuActions = mapOf(
-        configureChangeName(),
-        configureAddAttribute(),
-        configureUpdateAttribute(),
-        configureDeleteAttribute(),
-        configureDeleteElement()
-    )
+    private val menuHeader = menuHeader(getHeaderText(element.element.name))
 
     init {
         add(menuHeader)
 
-        configureMenuActions()
+        add(buildAttributeActionsHeader())
+        add(buildAddAttributeAction())
+        add(buildUpdateAttributeAction())
+        add(buildDeleteAttributeAction())
 
-        if (element is ModelLeafElement) configureLeafElementMenuActions()
-        else if (element is ModelTreeElement) configureTreeElementMenuActions()
+        add(buildElementActionsHeader())
+        add(buildUpdateNameAction())
+
+        if (element is ModelLeafElement) {
+            add(buildUpdateValueAction())
+        } else {
+            add(buildAddElementAction())
+        }
+
+        add(buildDeleteElementAction())
 
         element.subscribe(this)
     }
@@ -39,61 +43,52 @@ class ElementPopupMenu(
         menuHeader.text = getHeaderText(newName)
     }
 
-    private fun configureMenuActions() = menuActions
-        .forEach { (actionName, onClick) ->
-            val item = JMenuItem(actionName)
-            item.addActionListener { onClick() }
-            add(item)
-        }
+    private fun buildAttributeActionsHeader() = menuHeader("Attribute actions")
 
-    private fun configureLeafElementMenuActions() {
-        val item = JMenuItem("Update value")
-        item.addActionListener {
-            val newValue = promptInput("New value")
-            controller.updateValue(element.elementId, newValue)
-        }
-
-        add(item)
-    }
-
-    private fun configureTreeElementMenuActions() {
-        val item = JMenuItem("Add element")
-        item.addActionListener {
-            val elementType = promptInput("Element type (must be 'leaf' or 'tree')")
-            val elementName = promptInput("Element name")
-            controller.addElement(element.elementId, elementType, elementName)
-        }
-
-        add(item)
-    }
-
-    private fun configureChangeName() = "Change element name" to {
-        val newName = promptInput("New element name")
-        controller.updateName(element.elementId, newName)
-    }
-
-    private fun configureAddAttribute() = "Add Attribute" to {
+    private fun buildAddAttributeAction() = menuItem("Add attribute") {
         val key = promptInput("Attribute key")
         val value = promptInput("Attribute value")
         controller.addAttribute(element.elementId, key, value)
     }
 
-    private fun configureUpdateAttribute() = "Update Attribute" to {
+    private fun buildUpdateAttributeAction() = menuItem("Update attribute") {
         val key = promptInput("Attribute key")
         val value = promptInput("Attribute value")
         controller.updateAttribute(element.elementId, key, value)
     }
 
-    private fun configureDeleteAttribute() = "Delete Attribute" to {
+    private fun buildDeleteAttributeAction() = menuItem("Delete attribute") {
         val key = promptInput("Attribute key")
         controller.deleteAttribute(element.elementId, key)
     }
 
-    private fun configureDeleteElement() = "Delete Element" to {
+    private fun buildElementActionsHeader() = menuHeader("Element actions")
+
+    private fun buildUpdateNameAction() = menuItem("Update name") {
+        val newName = promptInput("New name")
+        controller.updateName(element.elementId, newName)
+    }
+
+    private fun buildUpdateValueAction() = menuItem("Update value") {
+        val newValue = promptInput("New value")
+        controller.updateValue(element.elementId, newValue)
+    }
+
+    private fun buildAddElementAction() = menuItem("Add element") {
+        val elementType = promptInput("Element type (must be 'leaf' or 'tree')")
+        val elementName = promptInput("Element name")
+        controller.addElement(element.elementId, elementType, elementName)
+    }
+
+    private fun buildDeleteElementAction() = menuItem("Delete element") {
         controller.deleteElement(element.elementId)
     }
 
+    private fun menuItem(label: String, onClick: Action) = JMenuItem(label).apply { addActionListener { onClick() } }
+
+    private fun menuHeader(label: String) = JMenuItem(label).apply { isEnabled = false }
+
     private fun promptInput(text: String) = JOptionPane.showInputDialog(text)
 
-    private fun getHeaderText(elementName: String) = "Actions for $elementName"
+    private fun getHeaderText(elementName: String) = "Actions for element $elementName"
 }

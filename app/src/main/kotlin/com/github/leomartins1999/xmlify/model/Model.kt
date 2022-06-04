@@ -2,9 +2,11 @@ package com.github.leomartins1999.xmlify.model
 
 import com.github.leomartins1999.xmlify.exceptions.ElementNotFoundException
 import com.github.leomartins1999.xmlify.exceptions.InvalidModelOperationException
+import java.util.ArrayDeque
 import java.util.concurrent.atomic.AtomicInteger
 
 typealias ElementID = Int
+typealias ModelAction = () -> Unit
 
 class Model(
     root: Element = defaultElement
@@ -13,6 +15,8 @@ class Model(
     private val idGenerator = AtomicInteger(initialId)
 
     private val store = mutableMapOf<ElementID, ModelElement<*>>()
+
+    private val undoStack = ArrayDeque<ModelAction>()
 
     val root by lazy { store[initialId]!! }
 
@@ -24,23 +28,56 @@ class Model(
         .values
         .filter { it.parentElementId == elementId }
 
-    fun updateName(elementId: ElementID, newName: String) = store[elementId]
-        ?.updateName(newName)
-        ?: throw ElementNotFoundException(elementId)
+    fun getElement(elementId: ElementID) = store[elementId] ?: throw ElementNotFoundException(elementId)
 
-    fun addAttribute(elementId: ElementID, key: String, value: String) = store[elementId]
+    fun updateName(elementId: ElementID, newName: String, isUndo: Boolean = false) {
+        val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
+        val oldName = elem.element.name
+
+        elem.updateName(newName)
+
+        if (!isUndo) enqueueForUndo { updateName(elementId, oldName, true) }
+    }
+
+    fun addAttribute(
+        elementId: ElementID,
+        key: String,
+        value: String,
+        isUndo: Boolean = false
+    ) = store[elementId]
         ?.addAttribute(key, value)
+        ?.also { if (!isUndo) enqueueForUndo { deleteAttribute(elementId, key, true) } }
         ?: throw ElementNotFoundException(elementId)
 
-    fun updateAttribute(elementId: ElementID, key: String, value: String) = store[elementId]
-        ?.updateAttribute(key, value)
-        ?: throw ElementNotFoundException(elementId)
+    fun updateAttribute(
+        elementId: ElementID,
+        key: String,
+        value: String,
+        isUndo: Boolean = false
+    ) {
+        val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
+        val oldValue = elem.element.attributes[key]!!
 
-    fun deleteAttribute(elementId: ElementID, key: String) = store[elementId]
-        ?.deleteAttribute(key)
-        ?: throw ElementNotFoundException(elementId)
+        elem.updateAttribute(key, value)
 
-    fun addElement(parentElementId: ElementID, elementType: String, elementName: String) {
+        if (!isUndo) enqueueForUndo { updateAttribute(elementId, key, oldValue, true) }
+    }
+
+    fun deleteAttribute(elementId: ElementID, key: String, isUndo: Boolean = false) {
+        val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
+        val oldValue = elem.element.attributes[key]!!
+
+        elem.deleteAttribute(key)
+
+        if (!isUndo) enqueueForUndo { addAttribute(elementId, key, oldValue, true) }
+    }
+
+    fun addElement(
+        parentElementId: ElementID,
+        elementType: String,
+        elementName: String,
+        isUndo: Boolean = false
+    ) {
         val parent = store[parentElementId] ?: throw ElementNotFoundException(parentElementId)
 
         val element = when (elementType) {
@@ -53,11 +90,11 @@ class Model(
 
         parent as ModelTreeElement
         parent.addChild(modelElement.elementId, modelElement.element)
+
+        if (!isUndo) enqueueForUndo { deleteElement(modelElement.elementId, true) }
     }
 
-    fun getElement(elementId: ElementID) = store[elementId] ?: throw ElementNotFoundException(elementId)
-
-    fun deleteElement(elementId: ElementID) {
+    fun deleteElement(elementId: ElementID, isUndo: Boolean = false) {
         if (elementId == initialId) throw InvalidModelOperationException("Root element cannot be removed!")
 
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
@@ -65,14 +102,25 @@ class Model(
 
         parent as ModelTreeElement
         parent.removeChild(elementId, elem.element)
+
+        if (!isUndo) enqueueForUndo { appendElementToTree(elem.elementId, parent.elementId) }
     }
 
-    fun updateValue(elementId: ElementID, newValue: Any) {
+    fun updateValue(elementId: ElementID, newValue: Any?, isUndo: Boolean = false) {
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
-
         elem as ModelLeafElement
+
+        val oldValue = elem.element.value
         elem.updateValue(newValue)
+
+        if (!isUndo) enqueueForUndo { updateValue(elementId, oldValue, true) }
     }
+
+    fun undo() =
+        if (undoStack.isNotEmpty()) undoStack.pop().invoke()
+        else throw InvalidModelOperationException("Tried to undo but there is nothing to undo!")
+
+    private fun enqueueForUndo(action: ModelAction) = undoStack.push(action)
 
     private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
         val modelElem = appendToStore(root, previousElementId)
@@ -92,6 +140,14 @@ class Model(
     }
 
     private fun generateElementId() = idGenerator.getAndIncrement()
+
+    private fun appendElementToTree(elementId: ElementID, parentElementId: ElementID) {
+        val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
+        val parent = store[parentElementId] ?: throw ElementNotFoundException(parentElementId)
+
+        parent as ModelTreeElement
+        parent.addChild(elem.elementId, elem.element)
+    }
 
     private companion object {
         private const val initialId = 1
