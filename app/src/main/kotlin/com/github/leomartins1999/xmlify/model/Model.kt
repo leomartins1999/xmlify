@@ -114,7 +114,7 @@ class Model(
         val oldValue = elem.element.value
         elem.updateValue(newValue)
 
-        if (isUndo) enqueueForUndo { updateValue(elementId, oldValue, true) }
+        if (!isUndo) enqueueForUndo { updateValue(elementId, oldValue, true) }
     }
 
     fun undo() =
