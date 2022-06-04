@@ -13,5 +13,5 @@ interface ElementObserver {
 
     fun onElementRemoved(elementID: ElementID) {}
 
-    fun onUpdateValue(newValue: Any) {}
+    fun onUpdateValue(newValue: Any?) {}
 }

@@ -7,7 +7,7 @@ class ModelLeafElement(
 ) : ModelElement<LeafElement>(id, previousElementId) {
     override var element = originalElement.copyElement()
 
-    fun updateValue(newValue: Any) {
+    fun updateValue(newValue: Any?) {
         element = element.copy(value = newValue)
         notifyObservers { onUpdateValue(newValue) }
     }
