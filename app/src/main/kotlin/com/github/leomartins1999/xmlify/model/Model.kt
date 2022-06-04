@@ -1,5 +1,7 @@
 package com.github.leomartins1999.xmlify.model
 
+import com.github.leomartins1999.xmlify.exceptions.ElementNotFoundException
+import com.github.leomartins1999.xmlify.exceptions.InvalidModelOperationException
 import java.util.concurrent.atomic.AtomicInteger
 
 typealias ElementID = Int
@@ -20,23 +22,33 @@ class Model(
 
     fun getChildren(elementId: ElementID): List<ModelElement<*>> = store
         .values
-        .filter { it.previousElementId == elementId }
+        .filter { it.parentElementId == elementId }
 
     fun updateName(elementId: ElementID, newName: String) = store[elementId]
         ?.updateName(newName)
-        ?: throw NoSuchElementException()
+        ?: throw ElementNotFoundException(elementId)
 
     fun addAttribute(elementId: ElementID, key: String, value: String) = store[elementId]
         ?.addAttribute(key, value)
-        ?: throw NoSuchElementException()
+        ?: throw ElementNotFoundException(elementId)
 
     fun updateAttribute(elementId: ElementID, key: String, value: String) = store[elementId]
         ?.updateAttribute(key, value)
-        ?: throw NoSuchElementException()
+        ?: throw ElementNotFoundException(elementId)
 
     fun deleteAttribute(elementId: ElementID, key: String) = store[elementId]
         ?.deleteAttribute(key)
-        ?: throw NoSuchElementException()
+        ?: throw ElementNotFoundException(elementId)
+
+    fun deleteElement(elementId: ElementID) {
+        if (elementId == initialId) throw InvalidModelOperationException("Root element cannot be removed!")
+
+        val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
+        val parent = store[elem.parentElementId] ?: throw ElementNotFoundException(elem.parentElementId)
+
+        parent as ModelTreeElement
+        parent.removeChild(elementId, elem.element)
+    }
 
     private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
         val modelElem = appendToStore(root, previousElementId)

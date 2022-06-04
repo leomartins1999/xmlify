@@ -5,7 +5,7 @@ import com.github.leomartins1999.xmlify.exceptions.UnknownElementTypeException
 
 abstract class ModelElement<T : Element>(
     val elementId: ElementID,
-    val previousElementId: ElementID
+    val parentElementId: ElementID
 ) {
 
     private val observers = mutableListOf<ElementObserver>()
@@ -53,23 +53,7 @@ abstract class ModelElement<T : Element>(
 
     fun subscribe(consumer: ElementObserver) = observers.add(consumer)
 
-    private fun notifyObservers(notification: ElementObserver.() -> Unit) = observers.forEach(notification)
-}
-
-class ModelLeafElement(
-    originalElement: LeafElement,
-    id: ElementID,
-    previousElementId: ElementID
-) : ModelElement<LeafElement>(id, previousElementId) {
-    override var element = originalElement.copyElement()
-}
-
-class ModelTreeElement(
-    originalElement: TreeElement,
-    id: ElementID,
-    previousElementId: ElementID
-) : ModelElement<TreeElement>(id, previousElementId) {
-    override var element = originalElement.copyElement()
+    fun notifyObservers(notification: ElementObserver.() -> Unit) = observers.forEach(notification)
 }
 
 fun Element.toModelElement(
