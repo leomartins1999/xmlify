@@ -22,4 +22,7 @@ class Controller(private val model: Model) {
 
     fun deleteElement(elementId: ElementID) =
         model.deleteElement(elementId)
+
+    fun updateValue(elementId: ElementID, newValue: Any) =
+        model.updateValue(elementId, newValue)
 }

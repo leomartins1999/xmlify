@@ -3,6 +3,7 @@ package com.github.leomartins1999.xmlify.view
 import com.github.leomartins1999.xmlify.Controller
 import com.github.leomartins1999.xmlify.model.ElementObserver
 import com.github.leomartins1999.xmlify.model.ModelElement
+import com.github.leomartins1999.xmlify.model.ModelLeafElement
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
@@ -24,7 +25,10 @@ class ElementPopupMenu(
 
     init {
         add(menuHeader)
+
         configureMenuActions()
+
+        if (element is ModelLeafElement) configureLeafElementMenuActions()
 
         element.subscribe(this)
     }
@@ -33,12 +37,21 @@ class ElementPopupMenu(
         menuHeader.text = getHeaderText(newName)
     }
 
-    private fun configureMenuActions() {
-        menuActions.forEach { (actionName, onClick) ->
+    private fun configureMenuActions() = menuActions
+        .forEach { (actionName, onClick) ->
             val item = JMenuItem(actionName)
             item.addActionListener { onClick() }
             add(item)
         }
+
+    private fun configureLeafElementMenuActions() {
+        val item = JMenuItem("Update value")
+        item.addActionListener {
+            val newValue = promptInput("New value")
+            controller.updateValue(element.elementId, newValue)
+        }
+
+        add(item)
     }
 
     private fun configureChangeName() = "Change element name" to {

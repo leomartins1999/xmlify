@@ -10,4 +10,6 @@ interface ElementObserver {
     fun onDeleteAttribute(key: String) {}
 
     fun onElementRemoved(elementID: ElementID) {}
+
+    fun onUpdateValue(newValue: Any) {}
 }
