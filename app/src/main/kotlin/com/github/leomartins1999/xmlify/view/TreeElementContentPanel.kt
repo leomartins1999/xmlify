@@ -30,6 +30,15 @@ class TreeElementContentPanel(
         treeElement.subscribe(this)
     }
 
+    override fun onElementAdded(elementID: ElementID) {
+        val elementModel = controller.getElement(elementID)
+        val elementView = ElementView(controller, elementModel)
+
+        elementPanels[elementID] = elementView
+        add(elementView)
+        revalidate()
+    }
+
     override fun onElementRemoved(elementID: ElementID) =
         remove(elementPanels[elementID]).also { revalidate() }
 

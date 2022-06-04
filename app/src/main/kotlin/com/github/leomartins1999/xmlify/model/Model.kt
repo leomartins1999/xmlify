@@ -40,6 +40,23 @@ class Model(
         ?.deleteAttribute(key)
         ?: throw ElementNotFoundException(elementId)
 
+    fun addElement(parentElementId: ElementID, elementType: String, elementName: String) {
+        val parent = store[parentElementId] ?: throw ElementNotFoundException(parentElementId)
+
+        val element = when (elementType) {
+            "tree" -> element(elementName, listOf())
+            "leaf" -> element(elementName)
+            else -> throw InvalidModelOperationException("Unknown element type $elementType")
+        }
+
+        val modelElement = appendToStore(element, parentElementId)
+
+        parent as ModelTreeElement
+        parent.addChild(modelElement.elementId, modelElement.element)
+    }
+
+    fun getElement(elementId: ElementID) = store[elementId] ?: throw ElementNotFoundException(elementId)
+
     fun deleteElement(elementId: ElementID) {
         if (elementId == initialId) throw InvalidModelOperationException("Root element cannot be removed!")
 
@@ -56,6 +73,7 @@ class Model(
         elem as ModelLeafElement
         elem.updateValue(newValue)
     }
+
     private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
         val modelElem = appendToStore(root, previousElementId)
 

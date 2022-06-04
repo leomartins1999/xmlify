@@ -4,6 +4,7 @@ import com.github.leomartins1999.xmlify.Controller
 import com.github.leomartins1999.xmlify.model.ElementObserver
 import com.github.leomartins1999.xmlify.model.ModelElement
 import com.github.leomartins1999.xmlify.model.ModelLeafElement
+import com.github.leomartins1999.xmlify.model.ModelTreeElement
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
@@ -29,6 +30,7 @@ class ElementPopupMenu(
         configureMenuActions()
 
         if (element is ModelLeafElement) configureLeafElementMenuActions()
+        else if (element is ModelTreeElement) configureTreeElementMenuActions()
 
         element.subscribe(this)
     }
@@ -49,6 +51,17 @@ class ElementPopupMenu(
         item.addActionListener {
             val newValue = promptInput("New value")
             controller.updateValue(element.elementId, newValue)
+        }
+
+        add(item)
+    }
+
+    private fun configureTreeElementMenuActions() {
+        val item = JMenuItem("Add element")
+        item.addActionListener {
+            val elementType = promptInput("Element type (must be 'leaf' or 'tree')")
+            val elementName = promptInput("Element name")
+            controller.addElement(element.elementId, elementType, elementName)
         }
 
         add(item)
