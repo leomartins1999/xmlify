@@ -1,5 +1,6 @@
 package com.github.leomartins1999.xmlify.view
 
+import com.github.leomartins1999.xmlify.model.Element
 import com.github.leomartins1999.xmlify.model.ElementObserver
 import com.github.leomartins1999.xmlify.model.ModelElement
 import javax.swing.BorderFactory.createTitledBorder
@@ -17,7 +18,7 @@ class ElementNamePanel(element: ModelElement<*>) : JPanel(), ElementObserver {
         element.subscribe(this)
     }
 
-    override fun onChangeName(newName: String) {
+    override fun onUpdateName(newName: String) {
         label.text = newName
     }
 

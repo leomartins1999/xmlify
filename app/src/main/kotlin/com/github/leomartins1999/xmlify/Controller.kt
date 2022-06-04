@@ -7,7 +7,16 @@ class Controller(private val model: Model) {
 
     fun getRoot() = model.root
 
+    fun getChildren(elementId: ElementID) = model.getChildren(elementId)
+
     fun updateName(elementId: ElementID, newName: String) = model.updateName(elementId, newName)
 
-    fun getChildren(elementId: ElementID) = model.getChildren(elementId)
+    fun addAttribute(elementId: ElementID, key: String, value: String) =
+        model.addAttribute(elementId, key, value)
+
+    fun updateAttribute(elementId: ElementID, key: String, value: String) =
+        model.updateAttribute(elementId, key, value)
+
+    fun deleteAttribute(elementId: ElementID, key: String) =
+        model.deleteAttribute(elementId, key)
 }

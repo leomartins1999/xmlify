@@ -1,6 +1,7 @@
 package com.github.leomartins1999.xmlify.view
 
 import com.github.leomartins1999.xmlify.Controller
+import com.github.leomartins1999.xmlify.model.Element
 import com.github.leomartins1999.xmlify.model.ElementObserver
 import com.github.leomartins1999.xmlify.model.ModelElement
 import javax.swing.JMenuItem
@@ -15,7 +16,10 @@ class ElementPopupMenu(
     private val menuHeader = JMenuItem(getHeaderText(element.element.name)).apply { isEnabled = false }
 
     private val menuActions = mapOf(
-        configureChangeName()
+        configureChangeName(),
+        configureAddAttribute(),
+        configureUpdateAttribute(),
+        configureDeleteAttribute()
     )
 
     init {
@@ -25,7 +29,7 @@ class ElementPopupMenu(
         element.subscribe(this)
     }
 
-    override fun onChangeName(newName: String) {
+    override fun onUpdateName(newName: String) {
         menuHeader.text = getHeaderText(newName)
     }
 
@@ -40,6 +44,23 @@ class ElementPopupMenu(
     private fun configureChangeName() = "Change element name" to {
         val newName = promptInput("New element name")
         controller.updateName(element.elementId, newName)
+    }
+
+    private fun configureAddAttribute() = "Add Attribute" to {
+        val key = promptInput("Attribute key")
+        val value = promptInput("Attribute value")
+        controller.addAttribute(element.elementId, key, value)
+    }
+
+    private fun configureUpdateAttribute() = "Update Attribute" to {
+        val key = promptInput("Attribute key")
+        val value = promptInput("Attribute value")
+        controller.updateAttribute(element.elementId, key, value)
+    }
+
+    private fun configureDeleteAttribute() = "Delete Attribute" to {
+        val key = promptInput("Attribute key")
+        controller.deleteAttribute(element.elementId, key)
     }
 
     private fun promptInput(text: String) = JOptionPane.showInputDialog(text)

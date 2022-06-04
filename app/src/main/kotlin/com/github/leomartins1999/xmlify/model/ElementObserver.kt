@@ -1,5 +1,11 @@
 package com.github.leomartins1999.xmlify.model
 
 interface ElementObserver {
-    fun onChangeName(newName: String) {}
+    fun onUpdateName(newName: String) {}
+
+    fun onAddAttribute(key: String, value: String) {}
+
+    fun onUpdateAttribute(key: String, value: String) {}
+
+    fun onDeleteAttribute(key: String) {}
 }
