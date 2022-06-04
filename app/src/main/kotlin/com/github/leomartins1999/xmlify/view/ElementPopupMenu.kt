@@ -1,7 +1,6 @@
 package com.github.leomartins1999.xmlify.view
 
 import com.github.leomartins1999.xmlify.Controller
-import com.github.leomartins1999.xmlify.model.Element
 import com.github.leomartins1999.xmlify.model.ElementObserver
 import com.github.leomartins1999.xmlify.model.ModelElement
 import javax.swing.JMenuItem

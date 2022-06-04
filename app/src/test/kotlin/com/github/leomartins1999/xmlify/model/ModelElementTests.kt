@@ -224,7 +224,7 @@ class ModelElementTests {
                 }
             }
 
-            val element = element("root", emptyList(),  attributes = mapOf("a" to "b"))
+            val element = element("root", emptyList(), attributes = mapOf("a" to "b"))
             val model = ModelTreeElement(element, 1, -1)
             model.subscribe(observer)
 
@@ -245,7 +245,7 @@ class ModelElementTests {
                 }
             }
 
-            val element = element("root", emptyList() ,attributes = mapOf("a" to "b"))
+            val element = element("root", emptyList(), attributes = mapOf("a" to "b"))
             val model = ModelTreeElement(element, 1, -1)
             model.subscribe(observer)
 
@@ -285,7 +285,7 @@ class ModelElementTests {
                 }
             }
 
-            val element = element("root", emptyList(),  attributes = mapOf("a" to "b"))
+            val element = element("root", emptyList(), attributes = mapOf("a" to "b"))
             val model = ModelTreeElement(element, 1, -1)
             model.subscribe(observer)
 
