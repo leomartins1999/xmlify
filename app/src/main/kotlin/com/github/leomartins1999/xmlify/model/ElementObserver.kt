@@ -8,4 +8,6 @@ interface ElementObserver {
     fun onUpdateAttribute(key: String, value: String) {}
 
     fun onDeleteAttribute(key: String) {}
+
+    fun onElementRemoved(elementID: ElementID) {}
 }

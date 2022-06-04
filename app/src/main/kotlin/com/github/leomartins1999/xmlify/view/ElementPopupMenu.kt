@@ -18,7 +18,8 @@ class ElementPopupMenu(
         configureChangeName(),
         configureAddAttribute(),
         configureUpdateAttribute(),
-        configureDeleteAttribute()
+        configureDeleteAttribute(),
+        configureDeleteElement()
     )
 
     init {
@@ -60,6 +61,10 @@ class ElementPopupMenu(
     private fun configureDeleteAttribute() = "Delete Attribute" to {
         val key = promptInput("Attribute key")
         controller.deleteAttribute(element.elementId, key)
+    }
+
+    private fun configureDeleteElement() = "Delete Element" to {
+        controller.deleteElement(element.elementId)
     }
 
     private fun promptInput(text: String) = JOptionPane.showInputDialog(text)

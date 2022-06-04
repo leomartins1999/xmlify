@@ -1,5 +1,6 @@
 package com.github.leomartins1999.xmlify.model
 
+import com.github.leomartins1999.xmlify.exceptions.ElementNotFoundException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -39,7 +40,7 @@ class ModelTests {
     fun `throws NoSuchElementException when trying to update the name of an unexisting element`() {
         val model = Model()
 
-        assertThrows<NoSuchElementException> { model.updateName(1000, "thisWillRaiseAnError") }
+        assertThrows<ElementNotFoundException> { model.updateName(1000, "thisWillRaiseAnError") }
     }
 
     @Test
