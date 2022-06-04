@@ -20,6 +20,11 @@ class Controller(private val model: Model) {
     fun deleteAttribute(elementId: ElementID, key: String) =
         model.deleteAttribute(elementId, key)
 
+    fun addElement(parentElementID: ElementID, elementType: String, elementName: String) =
+        model.addElement(parentElementID, elementType, elementName)
+
+    fun getElement(elementId: ElementID) = model.getElement(elementId)
+
     fun deleteElement(elementId: ElementID) =
         model.deleteElement(elementId)
 
