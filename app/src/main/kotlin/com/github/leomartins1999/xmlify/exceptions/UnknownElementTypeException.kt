@@ -1,4 +1,4 @@
-package com.github.leomartins1999.xmlify
+package com.github.leomartins1999.xmlify.exceptions
 
 import kotlin.reflect.KClass
 

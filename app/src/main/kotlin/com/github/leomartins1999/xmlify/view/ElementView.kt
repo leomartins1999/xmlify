@@ -1,7 +1,7 @@
 package com.github.leomartins1999.xmlify.view
 
 import com.github.leomartins1999.xmlify.Controller
-import com.github.leomartins1999.xmlify.UnknownElementTypeException
+import com.github.leomartins1999.xmlify.exceptions.UnknownElementTypeException
 import com.github.leomartins1999.xmlify.model.ModelElement
 import com.github.leomartins1999.xmlify.model.ModelLeafElement
 import com.github.leomartins1999.xmlify.model.ModelTreeElement

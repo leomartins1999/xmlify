@@ -18,13 +18,25 @@ class Model(
         initElementStore(root)
     }
 
+    fun getChildren(elementId: ElementID): List<ModelElement<*>> = store
+        .values
+        .filter { it.previousElementId == elementId }
+
     fun updateName(elementId: ElementID, newName: String) = store[elementId]
         ?.updateName(newName)
         ?: throw NoSuchElementException()
 
-    fun getChildren(elementId: ElementID): List<ModelElement<*>> = store
-        .values
-        .filter { it.previousElementId == elementId }
+    fun addAttribute(elementId: ElementID, key: String, value: String) = store[elementId]
+        ?.addAttribute(key, value)
+        ?: throw NoSuchElementException()
+
+    fun updateAttribute(elementId: ElementID, key: String, value: String) = store[elementId]
+        ?.updateAttribute(key, value)
+        ?: throw NoSuchElementException()
+
+    fun deleteAttribute(elementId: ElementID, key: String) = store[elementId]
+        ?.deleteAttribute(key)
+        ?: throw NoSuchElementException()
 
     private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
         val modelElem = appendToStore(root, previousElementId)

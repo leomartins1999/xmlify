@@ -17,7 +17,7 @@ class ElementNamePanel(element: ModelElement<*>) : JPanel(), ElementObserver {
         element.subscribe(this)
     }
 
-    override fun onChangeName(newName: String) {
+    override fun onUpdateName(newName: String) {
         label.text = newName
     }
 
