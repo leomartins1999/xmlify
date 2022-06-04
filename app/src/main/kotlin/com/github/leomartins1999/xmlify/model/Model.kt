@@ -2,9 +2,8 @@ package com.github.leomartins1999.xmlify.model
 
 import com.github.leomartins1999.xmlify.exceptions.ElementNotFoundException
 import com.github.leomartins1999.xmlify.exceptions.InvalidModelOperationException
-import com.github.leomartins1999.xmlify.exceptions.UnknownElementTypeException
-import java.util.concurrent.atomic.AtomicInteger
 import java.util.ArrayDeque
+import java.util.concurrent.atomic.AtomicInteger
 
 typealias ElementID = Int
 typealias ModelAction = () -> Unit

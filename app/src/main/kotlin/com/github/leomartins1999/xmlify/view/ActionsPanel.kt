@@ -22,5 +22,4 @@ class ActionsPanel(
     private companion object {
         private const val undoText = "Undo"
     }
-
 }
