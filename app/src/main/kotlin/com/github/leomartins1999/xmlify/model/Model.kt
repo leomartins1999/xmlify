@@ -17,6 +17,7 @@ class Model(
     private val store = mutableMapOf<ElementID, ModelElement<*>>()
 
     private val undoStack = ArrayDeque<ModelAction>()
+    private val redoStack = ArrayDeque<ModelAction>()
 
     val root by lazy { store[initialId]!! }
 
@@ -30,53 +31,66 @@ class Model(
 
     fun getElement(elementId: ElementID) = store[elementId] ?: throw ElementNotFoundException(elementId)
 
-    fun updateName(elementId: ElementID, newName: String, isUndo: Boolean = false) {
+    fun updateName(
+        elementId: ElementID,
+        newName: String,
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
+    ) {
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
         val oldName = elem.element.name
 
         elem.updateName(newName)
 
-        if (!isUndo) enqueueForUndo { updateName(elementId, oldName, true) }
+        updateActionHistory(isUndo, isRedo) { undo, redo -> updateName(elementId, oldName, undo, redo) }
     }
 
     fun addAttribute(
         elementId: ElementID,
         key: String,
         value: String,
-        isUndo: Boolean = false
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
     ) = store[elementId]
         ?.addAttribute(key, value)
-        ?.also { if (!isUndo) enqueueForUndo { deleteAttribute(elementId, key, true) } }
+        ?.also { updateActionHistory(isUndo, isRedo) { undo, redo -> deleteAttribute(elementId, key, undo, redo) } }
         ?: throw ElementNotFoundException(elementId)
 
     fun updateAttribute(
         elementId: ElementID,
         key: String,
         value: String,
-        isUndo: Boolean = false
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
     ) {
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
         val oldValue = elem.element.attributes[key]!!
 
         elem.updateAttribute(key, value)
 
-        if (!isUndo) enqueueForUndo { updateAttribute(elementId, key, oldValue, true) }
+        updateActionHistory(isUndo, isRedo) { undo, redo -> updateAttribute(elementId, key, oldValue, undo, redo) }
     }
 
-    fun deleteAttribute(elementId: ElementID, key: String, isUndo: Boolean = false) {
+    fun deleteAttribute(
+        elementId: ElementID,
+        key: String,
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
+    ) {
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
         val oldValue = elem.element.attributes[key]!!
 
         elem.deleteAttribute(key)
 
-        if (!isUndo) enqueueForUndo { addAttribute(elementId, key, oldValue, true) }
+        updateActionHistory(isUndo, isRedo) { undo, redo -> addAttribute(elementId, key, oldValue, undo, redo) }
     }
 
     fun addElement(
         parentElementId: ElementID,
         elementType: String,
         elementName: String,
-        isUndo: Boolean = false
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
     ) {
         val parent = store[parentElementId] ?: throw ElementNotFoundException(parentElementId)
 
@@ -91,10 +105,14 @@ class Model(
         parent as ModelTreeElement
         parent.addChild(modelElement.elementId, modelElement.element)
 
-        if (!isUndo) enqueueForUndo { deleteElement(modelElement.elementId, true) }
+        updateActionHistory(isUndo, isRedo) { undo, redo -> deleteElement(modelElement.elementId, undo, redo) }
     }
 
-    fun deleteElement(elementId: ElementID, isUndo: Boolean = false) {
+    fun deleteElement(
+        elementId: ElementID,
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
+    ) {
         if (elementId == initialId) throw InvalidModelOperationException("Root element cannot be removed!")
 
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
@@ -103,24 +121,50 @@ class Model(
         parent as ModelTreeElement
         parent.removeChild(elementId, elem.element)
 
-        if (!isUndo) enqueueForUndo { appendElementToTree(elem.elementId, parent.elementId) }
+        updateActionHistory(isUndo, isRedo) { undo, redo ->
+            appendElementToTree(elem.elementId, parent.elementId, undo, redo)
+        }
     }
 
-    fun updateValue(elementId: ElementID, newValue: Any?, isUndo: Boolean = false) {
+    fun updateValue(
+        elementId: ElementID,
+        newValue: Any?,
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
+    ) {
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
         elem as ModelLeafElement
 
         val oldValue = elem.element.value
         elem.updateValue(newValue)
 
-        if (!isUndo) enqueueForUndo { updateValue(elementId, oldValue, true) }
+        updateActionHistory(isUndo, isRedo) { undo, redo -> updateValue(elementId, oldValue, undo, redo) }
     }
 
     fun undo() =
         if (undoStack.isNotEmpty()) undoStack.pop().invoke()
         else throw InvalidModelOperationException("Tried to undo but there is nothing to undo!")
 
-    private fun enqueueForUndo(action: ModelAction) = undoStack.push(action)
+    fun redo() =
+        if (redoStack.isNotEmpty()) redoStack.pop().invoke()
+        else throw InvalidModelOperationException("Tried to redo but there is nothing to redo!")
+
+    private fun updateActionHistory(
+        isUndo: Boolean,
+        isRedo: Boolean,
+        rollbackAction: (Boolean, Boolean) -> Unit
+    ) =
+        if (isUndo) enqueueForRedo { rollbackAction(false, true) }
+        else enqueueForUndo(isRedo) { rollbackAction(true, false) }
+
+    private fun enqueueForUndo(
+        isRedo: Boolean = false,
+        action: ModelAction
+    ) = undoStack
+        .push(action)
+        .also { if (!isRedo) redoStack.clear() }
+
+    private fun enqueueForRedo(action: ModelAction) = redoStack.push(action)
 
     private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
         val modelElem = appendToStore(root, previousElementId)
@@ -141,12 +185,19 @@ class Model(
 
     private fun generateElementId() = idGenerator.getAndIncrement()
 
-    private fun appendElementToTree(elementId: ElementID, parentElementId: ElementID) {
+    private fun appendElementToTree(
+        elementId: ElementID,
+        parentElementId: ElementID,
+        isUndo: Boolean = false,
+        isRedo: Boolean = false
+    ) {
         val elem = store[elementId] ?: throw ElementNotFoundException(elementId)
         val parent = store[parentElementId] ?: throw ElementNotFoundException(parentElementId)
 
         parent as ModelTreeElement
         parent.addChild(elem.elementId, elem.element)
+
+        updateActionHistory(isUndo, isRedo) { undo, redo -> deleteElement(elem.elementId, undo, redo) }
     }
 
     private companion object {

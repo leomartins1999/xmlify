@@ -13,13 +13,15 @@ class ActionsPanel(
     init {
         layout = BoxLayout(this, X_AXIS)
 
-        add(buildUndoButton(controller))
+        add(buildButton(undoText) { controller.undo() })
+        add(buildButton(redoText) { controller.redo() })
     }
 
-    private fun buildUndoButton(controller: Controller) =
-        JButton(undoText).apply { addActionListener { controller.undo() } }
+    private fun buildButton(label: String, onClick: Action) =
+        JButton(label).apply { addActionListener { onClick() } }
 
     private companion object {
         private const val undoText = "Undo"
+        private const val redoText = "Redo"
     }
 }

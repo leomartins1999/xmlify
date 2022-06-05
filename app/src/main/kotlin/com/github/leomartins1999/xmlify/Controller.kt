@@ -32,4 +32,6 @@ class Controller(private val model: Model) {
         model.updateValue(elementId, newValue)
 
     fun undo() = model.undo()
+
+    fun redo() = model.redo()
 }

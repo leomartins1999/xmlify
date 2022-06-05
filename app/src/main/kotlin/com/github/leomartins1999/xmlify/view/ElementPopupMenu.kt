@@ -8,7 +8,6 @@ import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
 
-typealias Action = () -> Unit
 
 class ElementPopupMenu(
     private val controller: Controller,
