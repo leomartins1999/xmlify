@@ -7,8 +7,7 @@ plugins {
 
 dependencies {
     implementation(project(":core"))
-
-    testImplementation(kotlin("reflect"))
+    implementation(kotlin("reflect"))
 }
 
 repositories {
