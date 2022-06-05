@@ -2,6 +2,8 @@ package com.github.leomartins1999.xmlify
 
 import com.github.leomartins1999.xmlify.model.ElementID
 import com.github.leomartins1999.xmlify.model.Model
+import com.github.leomartins1999.xmlify.model.document
+import java.io.File
 
 class Controller(private val model: Model) {
 
@@ -34,4 +36,12 @@ class Controller(private val model: Model) {
     fun undo() = model.undo()
 
     fun redo() = model.redo()
+
+    fun exportToFile(elementId: ElementID, filename: String) {
+        val modelElement = getElement(elementId)
+        val elem = model.extractElements(modelElement)
+        val doc = document(elem)
+
+        File(filename.plus(".xml")).writeText(doc.render())
+    }
 }

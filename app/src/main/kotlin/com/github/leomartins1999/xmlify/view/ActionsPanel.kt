@@ -1,6 +1,7 @@
 package com.github.leomartins1999.xmlify.view
 
 import com.github.leomartins1999.xmlify.Controller
+import com.github.leomartins1999.xmlify.utils.Action
 import javax.swing.BoxLayout
 import javax.swing.BoxLayout.X_AXIS
 import javax.swing.JButton

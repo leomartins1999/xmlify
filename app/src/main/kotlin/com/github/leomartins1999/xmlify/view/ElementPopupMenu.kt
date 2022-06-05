@@ -6,7 +6,6 @@ import com.github.leomartins1999.xmlify.model.ModelElement
 import com.github.leomartins1999.xmlify.model.ModelLeafElement
 import com.github.leomartins1999.xmlify.utils.Action
 import javax.swing.JMenuItem
-import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
 
 class ElementPopupMenu(
@@ -26,6 +25,7 @@ class ElementPopupMenu(
 
         add(buildElementActionsHeader())
         add(buildUpdateNameAction())
+        add(buildExtractElementAction())
 
         if (element is ModelLeafElement) {
             add(buildUpdateValueAction())
@@ -68,6 +68,11 @@ class ElementPopupMenu(
         controller.updateName(element.elementId, newName)
     }
 
+    private fun buildExtractElementAction() = menuItem("Export element to file") {
+        val filename = promptInput("Filename")
+        controller.exportToFile(element.elementId, filename)
+    }
+
     private fun buildUpdateValueAction() = menuItem("Update value") {
         val newValue = promptInput("New value")
         controller.updateValue(element.elementId, newValue)
@@ -86,8 +91,6 @@ class ElementPopupMenu(
     private fun menuItem(label: String, onClick: Action) = JMenuItem(label).apply { addActionListener { onClick() } }
 
     private fun menuHeader(label: String) = JMenuItem(label).apply { isEnabled = false }
-
-    private fun promptInput(text: String) = JOptionPane.showInputDialog(text)
 
     private fun getHeaderText(elementName: String) = "Actions for element $elementName"
 }

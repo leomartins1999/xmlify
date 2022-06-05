@@ -2,6 +2,7 @@ package com.github.leomartins1999.xmlify.model
 
 import com.github.leomartins1999.xmlify.exceptions.ElementNotFoundException
 import com.github.leomartins1999.xmlify.exceptions.InvalidModelOperationException
+import com.github.leomartins1999.xmlify.exceptions.UnknownElementTypeException
 import com.github.leomartins1999.xmlify.utils.Action
 import java.util.ArrayDeque
 import java.util.concurrent.atomic.AtomicInteger
@@ -120,6 +121,7 @@ class Model(
 
         parent as ModelTreeElement
         parent.removeChild(elementId, elem.element)
+        elem.parentElementId = noParentElementId
 
         updateActionHistory(isUndo, isRedo) { undo, redo ->
             appendElementToTree(elem.elementId, parent.elementId, undo, redo)
@@ -149,6 +151,14 @@ class Model(
         if (redoStack.isNotEmpty()) redoStack.pop().invoke()
         else throw InvalidModelOperationException("Tried to redo but there is nothing to redo!")
 
+    fun extractElements(elem: ModelElement<*> = root): Element {
+        if (elem is ModelLeafElement) return elem.element
+        if (elem !is ModelTreeElement) throw UnknownElementTypeException(elem::class)
+
+        val children = getChildren(elem.elementId).map { extractElements(it) }
+        return elem.element.copy(children = children)
+    }
+
     private fun updateActionHistory(
         isUndo: Boolean,
         isRedo: Boolean,
@@ -166,7 +176,7 @@ class Model(
 
     private fun enqueueForRedo(action: Action) = redoStack.push(action)
 
-    private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
+    private fun initElementStore(root: Element, previousElementId: ElementID = noParentElementId) {
         val modelElem = appendToStore(root, previousElementId)
 
         if (modelElem is ModelTreeElement) {
@@ -197,12 +207,14 @@ class Model(
         parent as ModelTreeElement
         parent.addChild(elem.elementId, elem.element)
 
+        elem.parentElementId = parentElementId
+
         updateActionHistory(isUndo, isRedo) { undo, redo -> deleteElement(elem.elementId, undo, redo) }
     }
 
     private companion object {
         private const val initialId = 1
-        private const val noPreviousElementId = -1
+        private const val noParentElementId = -1
     }
 }
 

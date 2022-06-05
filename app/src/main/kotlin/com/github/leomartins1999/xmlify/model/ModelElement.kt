@@ -5,7 +5,7 @@ import com.github.leomartins1999.xmlify.exceptions.UnknownElementTypeException
 
 abstract class ModelElement<T : Element>(
     val elementId: ElementID,
-    val parentElementId: ElementID
+    var parentElementId: ElementID
 ) {
 
     private val observers = mutableListOf<ElementObserver>()
