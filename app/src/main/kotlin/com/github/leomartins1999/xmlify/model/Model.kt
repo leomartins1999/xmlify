@@ -97,7 +97,7 @@ class Model(
     ): ElementID {
         val parent = store[parentElementId] ?: throw ElementNotFoundException(parentElementId)
 
-        val element = when(elementType) {
+        val element = when (elementType) {
             ElementType.Leaf -> element(elementName)
             ElementType.Tree -> element(elementName, listOf())
         }

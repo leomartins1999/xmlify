@@ -32,5 +32,4 @@ class ElementActionRegistry(
 
     private fun buildActionProvider(config: AppConfiguration) =
         config.actionProviderClass?.instanceClassWithName<ElementActionProvider>()
-
 }
