@@ -217,19 +217,3 @@ class Model(
         private const val noParentElementId = -1
     }
 }
-
-private val defaultElement = element(
-    name = "myElement",
-    attributes = mapOf("attr1" to "value1", "attr2" to "value2"),
-    children = listOf(
-        element("null"),
-        element("string", "xpto"),
-        element(
-            "tree",
-            children = listOf(
-                element("leaf1", "l"),
-                element("leaf2", "l")
-            )
-        )
-    )
-)

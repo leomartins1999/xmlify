@@ -7,7 +7,7 @@ plugins {
 
 dependencies {
     implementation(project(":core"))
-    implementation(kotlin("reflect"))
+    implementation(project(":app"))
 }
 
 repositories {
