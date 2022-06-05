@@ -1,20 +1,17 @@
 package com.github.leomartins1999.xmlify.model
 
 import com.github.leomartins1999.xmlify.AppConfiguration
-import kotlin.reflect.full.createInstance
+import com.github.leomartins1999.xmlify.utils.instanceClassWithName
 
 interface ElementProvider {
     val element: Element
 }
 
-fun getRootElement(config: AppConfiguration): Element {
-    if (config.elementProviderClass == null) return defaultElement
-
-    val providerClass = Class.forName(config.elementProviderClass).kotlin
-    val instance = providerClass.createInstance() as ElementProvider
-
-    return instance.element
-}
+fun getRootElement(config: AppConfiguration = AppConfiguration()) =
+    if (config.elementProviderClass == null) defaultElement
+    else config.elementProviderClass
+        .instanceClassWithName<ElementProvider>()
+        .element
 
 val defaultElement = element(
     name = "myElement",

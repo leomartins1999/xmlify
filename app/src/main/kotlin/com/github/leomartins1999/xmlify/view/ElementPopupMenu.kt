@@ -2,6 +2,7 @@ package com.github.leomartins1999.xmlify.view
 
 import com.github.leomartins1999.xmlify.Controller
 import com.github.leomartins1999.xmlify.model.ElementObserver
+import com.github.leomartins1999.xmlify.model.ElementType
 import com.github.leomartins1999.xmlify.model.ModelElement
 import com.github.leomartins1999.xmlify.model.ModelLeafElement
 import com.github.leomartins1999.xmlify.utils.Action
@@ -14,6 +15,7 @@ class ElementPopupMenu(
 ) : JPopupMenu(), ElementObserver {
 
     private val menuHeader = menuHeader(getHeaderText(element.element.name))
+    private val customActionsHeader = menuHeader(getCustomActionsHeaderText(element.element.name))
 
     init {
         add(menuHeader)
@@ -35,11 +37,18 @@ class ElementPopupMenu(
 
         add(buildDeleteElementAction())
 
+        val customActions = getCustomActions()
+        if (customActions.isNotEmpty()) {
+            add(customActionsHeader)
+            customActions.forEach { add(it) }
+        }
+
         element.subscribe(this)
     }
 
     override fun onUpdateName(newName: String) {
         menuHeader.text = getHeaderText(newName)
+        customActionsHeader.text = getCustomActionsHeaderText(newName)
     }
 
     private fun buildAttributeActionsHeader() = menuHeader("Attribute actions")
@@ -79,18 +88,27 @@ class ElementPopupMenu(
     }
 
     private fun buildAddElementAction() = menuItem("Add element") {
-        val elementType = promptInput("Element type (must be 'leaf' or 'tree')")
+        val elementType = promptInput("Element type (must be 'Leaf' or 'Tree')")
         val elementName = promptInput("Element name")
-        controller.addElement(element.elementId, elementType, elementName)
+        controller.addElement(element.elementId, ElementType.valueOf(elementType), elementName)
     }
 
     private fun buildDeleteElementAction() = menuItem("Delete element") {
         controller.deleteElement(element.elementId)
     }
 
+    private fun getCustomActions() = actionRegistry
+        .getActions(element.element.name)
+        .map { menuItem(it.actionName) { it.action(controller, element.elementId) } }
+
     private fun menuItem(label: String, onClick: Action) = JMenuItem(label).apply { addActionListener { onClick() } }
 
     private fun menuHeader(label: String) = JMenuItem(label).apply { isEnabled = false }
 
     private fun getHeaderText(elementName: String) = "Actions for element $elementName"
+    private fun getCustomActionsHeaderText(elementName: String) = "Custom actions for element $elementName"
+
+    private companion object {
+        private val actionRegistry = ElementActionRegistry()
+    }
 }

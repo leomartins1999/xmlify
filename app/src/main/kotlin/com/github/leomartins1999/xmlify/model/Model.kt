@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger
 
 typealias ElementID = Int
 
+enum class ElementType { Leaf, Tree }
+
 class Model(
     root: Element = defaultElement
 ) {
@@ -88,17 +90,16 @@ class Model(
 
     fun addElement(
         parentElementId: ElementID,
-        elementType: String,
+        elementType: ElementType,
         elementName: String,
         isUndo: Boolean = false,
         isRedo: Boolean = false
-    ) {
+    ): ElementID {
         val parent = store[parentElementId] ?: throw ElementNotFoundException(parentElementId)
 
-        val element = when (elementType) {
-            "tree" -> element(elementName, listOf())
-            "leaf" -> element(elementName)
-            else -> throw InvalidModelOperationException("Unknown element type $elementType")
+        val element = when(elementType) {
+            ElementType.Leaf -> element(elementName)
+            ElementType.Tree -> element(elementName, listOf())
         }
 
         val modelElement = appendToStore(element, parentElementId)
@@ -107,6 +108,8 @@ class Model(
         parent.addChild(modelElement.elementId, modelElement.element)
 
         updateActionHistory(isUndo, isRedo) { undo, redo -> deleteElement(modelElement.elementId, undo, redo) }
+
+        return modelElement.elementId
     }
 
     fun deleteElement(

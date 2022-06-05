@@ -5,9 +5,7 @@ import com.github.leomartins1999.xmlify.model.getRootElement
 import com.github.leomartins1999.xmlify.view.View
 
 fun main() {
-    val appConfig = AppConfiguration()
-
-    val rootElement = getRootElement(appConfig)
+    val rootElement = getRootElement()
 
     val model = Model(rootElement)
     val controller = Controller(model)

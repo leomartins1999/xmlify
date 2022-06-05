@@ -1,11 +1,15 @@
 package com.github.leomartins1999.xmlify
 
 import com.github.leomartins1999.xmlify.model.ElementID
+import com.github.leomartins1999.xmlify.model.ElementType
 import com.github.leomartins1999.xmlify.model.Model
 import com.github.leomartins1999.xmlify.model.document
 import java.io.File
 
-class Controller(private val model: Model) {
+class Controller(
+    private val model: Model,
+    private val config: AppConfiguration = AppConfiguration()
+) {
 
     fun getRoot() = model.root
 
@@ -22,7 +26,7 @@ class Controller(private val model: Model) {
     fun deleteAttribute(elementId: ElementID, key: String) =
         model.deleteAttribute(elementId, key)
 
-    fun addElement(parentElementID: ElementID, elementType: String, elementName: String) =
+    fun addElement(parentElementID: ElementID, elementType: ElementType, elementName: String) =
         model.addElement(parentElementID, elementType, elementName)
 
     fun getElement(elementId: ElementID) = model.getElement(elementId)
@@ -42,6 +46,6 @@ class Controller(private val model: Model) {
         val elem = model.extractElements(modelElement)
         val doc = document(elem)
 
-        File(filename.plus(".xml")).writeText(doc.render())
+        File(filename.plus(".").plus(config.defaultFileExtension)).writeText(doc.render())
     }
 }
