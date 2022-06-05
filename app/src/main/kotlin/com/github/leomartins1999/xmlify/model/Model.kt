@@ -2,11 +2,11 @@ package com.github.leomartins1999.xmlify.model
 
 import com.github.leomartins1999.xmlify.exceptions.ElementNotFoundException
 import com.github.leomartins1999.xmlify.exceptions.InvalidModelOperationException
+import com.github.leomartins1999.xmlify.utils.Action
 import java.util.ArrayDeque
 import java.util.concurrent.atomic.AtomicInteger
 
 typealias ElementID = Int
-typealias ModelAction = () -> Unit
 
 class Model(
     root: Element = defaultElement
@@ -16,8 +16,8 @@ class Model(
 
     private val store = mutableMapOf<ElementID, ModelElement<*>>()
 
-    private val undoStack = ArrayDeque<ModelAction>()
-    private val redoStack = ArrayDeque<ModelAction>()
+    private val undoStack = ArrayDeque<Action>()
+    private val redoStack = ArrayDeque<Action>()
 
     val root by lazy { store[initialId]!! }
 
@@ -159,12 +159,12 @@ class Model(
 
     private fun enqueueForUndo(
         isRedo: Boolean = false,
-        action: ModelAction
+        action: Action
     ) = undoStack
         .push(action)
         .also { if (!isRedo) redoStack.clear() }
 
-    private fun enqueueForRedo(action: ModelAction) = redoStack.push(action)
+    private fun enqueueForRedo(action: Action) = redoStack.push(action)
 
     private fun initElementStore(root: Element, previousElementId: ElementID = noPreviousElementId) {
         val modelElem = appendToStore(root, previousElementId)

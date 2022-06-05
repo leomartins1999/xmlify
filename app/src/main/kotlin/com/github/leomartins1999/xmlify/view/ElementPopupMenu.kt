@@ -4,10 +4,10 @@ import com.github.leomartins1999.xmlify.Controller
 import com.github.leomartins1999.xmlify.model.ElementObserver
 import com.github.leomartins1999.xmlify.model.ModelElement
 import com.github.leomartins1999.xmlify.model.ModelLeafElement
+import com.github.leomartins1999.xmlify.utils.Action
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
-
 
 class ElementPopupMenu(
     private val controller: Controller,
